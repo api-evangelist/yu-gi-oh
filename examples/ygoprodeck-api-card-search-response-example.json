@@ -1,0 +1,51 @@
+{
+  "data": [
+    {
+      "id": 46986414,
+      "name": "Dark Magician",
+      "typeline": [
+        "Spellcaster",
+        "Normal"
+      ],
+      "type": "Normal Monster",
+      "humanReadableCardType": "Normal Monster",
+      "frameType": "normal",
+      "desc": "The ultimate wizard in terms of attack and defense.",
+      "race": "Spellcaster",
+      "atk": 2500,
+      "def": 2100,
+      "level": 7,
+      "attribute": "DARK",
+      "linkval": 4,
+      "linkmarkers": [
+        "Top",
+        "Bottom-Left",
+        "Bottom-Right"
+      ],
+      "scale": 4,
+      "archetype": "Dark Magician",
+      "ygoprodeck_url": "https://ygoprodeck.com/card/dark-magician-4087",
+      "card_sets": [
+        {}
+      ],
+      "card_images": [
+        {}
+      ],
+      "card_prices": [
+        {}
+      ],
+      "misc_info": [
+        {}
+      ]
+    }
+  ],
+  "meta": {
+    "current_rows": 20,
+    "total_rows": 144,
+    "rows_remaining": 124,
+    "total_pages": 8,
+    "pages_remaining": 7,
+    "next_page": "https://ygoprodeck.com/",
+    "next_page_offset": 1
+  }
+}

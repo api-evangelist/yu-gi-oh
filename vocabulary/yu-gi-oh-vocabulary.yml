@@ -1,0 +1,467 @@
+vocabulary: 1.0.0
+info:
+  provider: YGOPRODeck
+  description: Unified vocabulary for the YGOPRODeck Yu-Gi-Oh! Card Database API — mapping the operational (OpenAPI) dimension to the capability (Naftiko) dimension.
+  created: '2026-05-30'
+  modified: '2026-05-30'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Trading Card Game
+    - Card Database
+    - Open Data
+operational:
+  apis:
+    - name: YGOPRODeck Card Database API
+      namespace: ygoprodeck
+      version: v7
+      baseUrl: https://db.ygoprodeck.com/api/v7
+      status: active
+  resources:
+    - name: cards
+      displayName: Cards
+      description: Card search, filtering, and metadata retrieval.
+      api: ygoprodeck
+      operations:
+        - name: searchCards
+          method: GET
+          path: /cardinfo.php
+          summary: Search Cards
+        - name: getRandomCard
+          method: GET
+          path: /randomcard.php
+          summary: Get Random Card
+    - name: card-sets
+      displayName: Card Sets
+      description: Yu-Gi-Oh! card set catalog and per-print details.
+      api: ygoprodeck
+      operations:
+        - name: listCardSets
+          method: GET
+          path: /cardsets.php
+          summary: List Card Sets
+        - name: getCardSetInfo
+          method: GET
+          path: /cardsetsinfo.php
+          summary: Get Card Set Print Info
+    - name: archetypes
+      displayName: Archetypes
+      description: Recognised Yu-Gi-Oh! archetype catalog.
+      api: ygoprodeck
+      operations:
+        - name: listArchetypes
+          method: GET
+          path: /archetypes.php
+          summary: List Archetypes
+    - name: reference-data
+      displayName: Reference Data
+      description: Valid value enumerations used by the search engine.
+      api: ygoprodeck
+      operations:
+        - name: getCardValues
+          method: GET
+          path: /cardvalues.php
+          summary: Get Valid Card Filter Values
+    - name: database
+      displayName: Database
+      description: Database version and freshness information.
+      api: ygoprodeck
+      operations:
+        - name: getDatabaseVersion
+          method: GET
+          path: /checkDBVer.php
+          summary: Get Database Version
+  actions:
+    - verb: search
+      httpMethod: GET
+      pattern: read
+    - verb: get
+      httpMethod: GET
+      pattern: read
+    - verb: list
+      httpMethod: GET
+      pattern: read
+  schemas:
+    cards:
+      - Card
+      - CardPrintingEntry
+      - CardImage
+      - CardMiscInfo
+      - CardSearchResponse
+    sets:
+      - CardSet
+      - CardSetPrint
+    pricing:
+      - CardPrice
+    reference:
+      - Archetype
+      - CardValues
+      - CardTypeEntry
+      - MonsterValues
+      - CardClassValues
+    database:
+      - DatabaseVersion
+    meta:
+      - SearchMeta
+      - ErrorResponse
+  parameters:
+    pagination:
+      - num
+      - offset
+    identifiers:
+      - fname
+      - id
+      - konami_id
+      - name
+      - setcode
+    filters:
+      - archetype
+      - atk
+      - attribute
+      - banlist
+      - cardset
+      - def
+      - format
+      - has_effect
+      - language
+      - level
+      - link
+      - linkmarker
+      - race
+      - scale
+      - staple
+      - type
+    date-window:
+      - dateregion
+      - enddate
+      - startdate
+    sort-and-meta:
+      - misc
+      - sort
+      - tcgplayer_data
+  enums:
+    attributes:
+      - DARK
+      - LIGHT
+      - WATER
+      - FIRE
+      - WIND
+      - EARTH
+      - DIVINE
+    card-types:
+      - Effect Monster
+      - Flip Effect Monster
+      - Flip Tuner Effect Monster
+      - Fusion Monster
+      - Gemini Monster
+      - Link Monster
+      - Normal Monster
+      - Normal Tuner Monster
+      - Pendulum Effect Fusion Monster
+      - Pendulum Effect Monster
+      - Pendulum Effect Ritual Monster
+      - Pendulum Flip Effect Monster
+      - Pendulum Normal Monster
+      - Pendulum Tuner Effect Monster
+      - Ritual Effect Monster
+      - Ritual Monster
+      - Skill Card
+      - Spell Card
+      - Spirit Monster
+      - Synchro Monster
+      - Synchro Pendulum Effect Monster
+      - Synchro Tuner Monster
+      - Token
+      - Toon Monster
+      - Trap Card
+      - Tuner Monster
+      - Union Effect Monster
+      - XYZ Monster
+      - XYZ Pendulum Effect Monster
+    link-markers:
+      - Top
+      - Bottom
+      - Left
+      - Right
+      - Top-Left
+      - Top-Right
+      - Bottom-Left
+      - Bottom-Right
+    card-groups:
+      - MONSTER
+      - SPELL
+      - TRAP
+      - SKILL
+    deck-areas:
+      - MAIN
+      - EXTRA
+      - SIDE
+    banlists:
+      - TCG
+      - OCG
+      - Goat
+    formats:
+      - tcg
+      - ocg
+      - goat
+      - ocg goat
+      - speed duel
+      - master duel
+      - rush duel
+      - duel links
+      - genesys
+    languages:
+      - fr
+      - de
+      - it
+      - pt
+  authentication:
+    schemes: []
+    note: 'YGOPRODeck v7 is unauthenticated. Rate limit: 20 requests per second per IP; one-hour block on violation.'
+capability:
+  workflows:
+    - name: YGOPRODeck — Archetypes
+      file: capabilities/ygoprodeck-archetypes.yaml
+      description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Archetypes. 1 operations. Lead operation: List Archetypes. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+      apis:
+        - ygoprodeck
+      tag: Archetypes
+      consumesNamespace: ygoprodeck-archetypes
+      restNamespace: ygoprodeck-archetypes-rest
+      mcpNamespace: ygoprodeck-archetypes-mcp
+      operationCount: 1
+      mcpTools:
+        - list-archetypes
+      personas:
+        - Yu-Gi-Oh! Player
+        - Deck Builder Developer
+        - Community Bot Developer
+    - name: YGOPRODeck — Card Sets
+      file: capabilities/ygoprodeck-card-sets.yaml
+      description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Card Sets. 2 operations. Lead operation: List Card Sets. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+      apis:
+        - ygoprodeck
+      tag: Card Sets
+      consumesNamespace: ygoprodeck-card-sets
+      restNamespace: ygoprodeck-card-sets-rest
+      mcpNamespace: ygoprodeck-card-sets-mcp
+      operationCount: 2
+      mcpTools:
+        - list-card-sets
+        - get-card-set-info
+      personas:
+        - Yu-Gi-Oh! Player
+        - Deck Builder Developer
+        - Community Bot Developer
+    - name: YGOPRODeck — Cards
+      file: capabilities/ygoprodeck-cards.yaml
+      description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Cards. 2 operations. Lead operation: Search Cards. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+      apis:
+        - ygoprodeck
+      tag: Cards
+      consumesNamespace: ygoprodeck-cards
+      restNamespace: ygoprodeck-cards-rest
+      mcpNamespace: ygoprodeck-cards-mcp
+      operationCount: 2
+      mcpTools:
+        - search-cards
+        - get-random-card
+      personas:
+        - Yu-Gi-Oh! Player
+        - Deck Builder Developer
+        - Community Bot Developer
+    - name: YGOPRODeck — Database
+      file: capabilities/ygoprodeck-database.yaml
+      description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Database. 1 operations. Lead operation: Get Database Version. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+      apis:
+        - ygoprodeck
+      tag: Database
+      consumesNamespace: ygoprodeck-database
+      restNamespace: ygoprodeck-database-rest
+      mcpNamespace: ygoprodeck-database-mcp
+      operationCount: 1
+      mcpTools:
+        - get-database-version
+      personas:
+        - Yu-Gi-Oh! Player
+        - Deck Builder Developer
+        - Community Bot Developer
+    - name: YGOPRODeck — Reference Data
+      file: capabilities/ygoprodeck-reference-data.yaml
+      description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Reference Data. 1 operations. Lead operation: Get Valid Card Filter Values. Self-contained Naftiko capability covering one YGOPRODeck business
+        surface.'
+      apis:
+        - ygoprodeck
+      tag: Reference Data
+      consumesNamespace: ygoprodeck-reference-data
+      restNamespace: ygoprodeck-reference-data-rest
+      mcpNamespace: ygoprodeck-reference-data-mcp
+      operationCount: 1
+      mcpTools:
+        - get-card-values
+      personas:
+        - Yu-Gi-Oh! Player
+        - Deck Builder Developer
+        - Community Bot Developer
+  personas:
+    - id: yugioh-player
+      name: Yu-Gi-Oh! Player
+      description: Casual or competitive Yu-Gi-Oh! player looking up cards, prices, and rulings.
+      workflows:
+        - YGOPRODeck — Archetypes
+        - YGOPRODeck — Card Sets
+        - YGOPRODeck — Cards
+    - id: deck-builder-dev
+      name: Deck Builder Developer
+      description: Developer building a deck builder, simulator, or legality checker.
+      workflows:
+        - YGOPRODeck — Archetypes
+        - YGOPRODeck — Card Sets
+        - YGOPRODeck — Cards
+        - YGOPRODeck — Database
+        - YGOPRODeck — Reference Data
+    - id: community-bot-dev
+      name: Community Bot Developer
+      description: Developer building Discord bots, web widgets, or analytics dashboards on the Yu-Gi-Oh! corpus.
+      workflows:
+        - YGOPRODeck — Archetypes
+        - YGOPRODeck — Card Sets
+        - YGOPRODeck — Cards
+        - YGOPRODeck — Database
+        - YGOPRODeck — Reference Data
+    - id: card-data-analyst
+      name: Card Data Analyst
+      description: Analyst working on meta dashboards, price tracking, and archetype trends.
+      workflows:
+        - YGOPRODeck — Archetypes
+        - YGOPRODeck — Card Sets
+        - YGOPRODeck — Cards
+        - YGOPRODeck — Database
+  domains:
+    - name: Cards
+      description: Card search, metadata, and image catalog.
+      resources:
+        - cards
+      workflows:
+        - YGOPRODeck — Cards
+    - name: Card Sets
+      description: Card set catalog and per-print details.
+      resources:
+        - card-sets
+      workflows:
+        - YGOPRODeck — Card Sets
+    - name: Archetypes
+      description: Archetype catalog.
+      resources:
+        - archetypes
+      workflows:
+        - YGOPRODeck — Archetypes
+    - name: Reference Data
+      description: Valid value enumerations powering search filters.
+      resources:
+        - reference-data
+      workflows:
+        - YGOPRODeck — Reference Data
+    - name: Database
+      description: Database version and freshness.
+      resources:
+        - database
+      workflows:
+        - YGOPRODeck — Database
+  namespaces:
+    - type: consumes
+      namespace: ygoprodeck-archetypes
+      port:
+    - type: rest
+      namespace: ygoprodeck-archetypes-rest
+      port: 8080
+    - type: mcp
+      namespace: ygoprodeck-archetypes-mcp
+      port: 9090
+    - type: consumes
+      namespace: ygoprodeck-card-sets
+      port:
+    - type: rest
+      namespace: ygoprodeck-card-sets-rest
+      port: 8080
+    - type: mcp
+      namespace: ygoprodeck-card-sets-mcp
+      port: 9090
+    - type: consumes
+      namespace: ygoprodeck-cards
+      port:
+    - type: rest
+      namespace: ygoprodeck-cards-rest
+      port: 8080
+    - type: mcp
+      namespace: ygoprodeck-cards-mcp
+      port: 9090
+    - type: consumes
+      namespace: ygoprodeck-database
+      port:
+    - type: rest
+      namespace: ygoprodeck-database-rest
+      port: 8080
+    - type: mcp
+      namespace: ygoprodeck-database-mcp
+      port: 9090
+    - type: consumes
+      namespace: ygoprodeck-reference-data
+      port:
+    - type: rest
+      namespace: ygoprodeck-reference-data-rest
+      port: 8080
+    - type: mcp
+      namespace: ygoprodeck-reference-data-mcp
+      port: 9090
+  binds: []
+crossReference:
+  - resource: cards
+    operations:
+      - searchCards
+      - getRandomCard
+    workflows:
+      - YGOPRODeck — Cards
+    personas:
+      - yugioh-player
+      - deck-builder-dev
+      - community-bot-dev
+      - card-data-analyst
+  - resource: card-sets
+    operations:
+      - listCardSets
+      - getCardSetInfo
+    workflows:
+      - YGOPRODeck — Card Sets
+    personas:
+      - yugioh-player
+      - deck-builder-dev
+      - community-bot-dev
+      - card-data-analyst
+  - resource: archetypes
+    operations:
+      - listArchetypes
+    workflows:
+      - YGOPRODeck — Archetypes
+    personas:
+      - yugioh-player
+      - deck-builder-dev
+      - community-bot-dev
+      - card-data-analyst
+  - resource: reference-data
+    operations:
+      - getCardValues
+    workflows:
+      - YGOPRODeck — Reference Data
+    personas:
+      - deck-builder-dev
+      - community-bot-dev
+  - resource: database
+    operations:
+      - getDatabaseVersion
+    workflows:
+      - YGOPRODeck — Database
+    personas:
+      - deck-builder-dev
+      - community-bot-dev
+      - card-data-analyst

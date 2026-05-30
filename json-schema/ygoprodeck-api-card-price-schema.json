@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-price-schema.json",
+  "title": "CardPrice",
+  "description": "Marketplace prices for a card (USD, stringified decimal).",
+  "type": "object",
+  "properties": {
+    "cardmarket_price": {
+      "type": "string",
+      "description": "Cardmarket price (USD).",
+      "example": "0.02"
+    },
+    "tcgplayer_price": {
+      "type": "string",
+      "description": "TCGplayer price (USD).",
+      "example": "0.24"
+    },
+    "ebay_price": {
+      "type": "string",
+      "description": "eBay price (USD).",
+      "example": "0.99"
+    },
+    "amazon_price": {
+      "type": "string",
+      "description": "Amazon price (USD).",
+      "example": "14.45"
+    },
+    "coolstuffinc_price": {
+      "type": "string",
+      "description": "CoolStuffInc price (USD).",
+      "example": "0.39"
+    }
+  }
+}

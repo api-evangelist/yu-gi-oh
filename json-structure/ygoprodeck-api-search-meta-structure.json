@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-search-meta-structure.json",
+  "name": "SearchMeta",
+  "description": "Pagination metadata included when `num` and `offset` are used.",
+  "type": "object",
+  "properties": {
+    "current_rows": {
+      "type": "int32",
+      "description": "Number of rows in the current page.",
+      "example": 20
+    },
+    "total_rows": {
+      "type": "int32",
+      "description": "Total number of rows matched by the query.",
+      "example": 144
+    },
+    "rows_remaining": {
+      "type": "int32",
+      "description": "Rows remaining after this page.",
+      "example": 124
+    },
+    "total_pages": {
+      "type": "int32",
+      "description": "Total number of pages.",
+      "example": 8
+    },
+    "pages_remaining": {
+      "type": "int32",
+      "description": "Pages remaining after this one.",
+      "example": 7
+    },
+    "next_page": {
+      "type": "uri",
+      "description": "URL for the next page."
+    },
+    "next_page_offset": {
+      "type": "int32",
+      "description": "Offset value for the next page."
+    }
+  }
+}

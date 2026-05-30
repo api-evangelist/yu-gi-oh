@@ -1,0 +1,17 @@
+{
+  "type": [
+    "Normal Monster"
+  ],
+  "race": [
+    "Spellcaster"
+  ],
+  "attributes": [
+    "DARK"
+  ],
+  "level": [
+    7
+  ],
+  "linkmarkers": [
+    "example"
+  ]
+}

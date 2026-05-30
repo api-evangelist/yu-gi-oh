@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-search-response-schema.json",
+  "title": "CardSearchResponse",
+  "description": "Wrapper response for `/cardinfo.php` queries.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "The matched cards.",
+      "items": {
+        "type": "object",
+        "description": "A single Yu-Gi-Oh! card, including metadata, set printings, image URLs, and marketplace prices.",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "8-digit Yu-Gi-Oh! card passcode (unique per card).",
+            "example": 46986414
+          },
+          "name": {
+            "type": "string",
+            "description": "Card name (in the requested language).",
+            "example": "Dark Magician"
+          },
+          "typeline": {
+            "type": "array",
+            "description": "Type line tokens (e.g. `[\"Spellcaster\", \"Normal\"]`).",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Spellcaster",
+              "Normal"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "Card type (e.g. `Normal Monster`, `Effect Monster`, `Spell Card`, `Trap Card`, `Link Monster`).",
+            "example": "Normal Monster"
+          },
+          "humanReadableCardType": {
+            "type": "string",
+            "description": "Human-friendly version of the card type.",
+            "example": "Normal Monster"
+          },
+          "frameType": {
+            "type": "string",
+            "description": "The card frame style (e.g. `normal`, `effect`, `synchro`, `xyz`, `link`, `spell`, `trap`).",
+            "example": "normal"
+          },
+          "desc": {
+            "type": "string",
+            "description": "Card effect / flavour text.",
+            "example": "The ultimate wizard in terms of attack and defense."
+          },
+          "race": {
+            "type": "string",
+            "description": "Monster race (e.g. `Spellcaster`, `Dragon`) or Spell/Trap sub-type (`Continuous`, `Quick-Play`, `Counter`).",
+            "example": "Spellcaster"
+          },
+          "atk": {
+            "type": "integer",
+            "description": "Attack value (monsters only).",
+            "example": 2500
+          },
+          "def": {
+            "type": "integer",
+            "description": "Defense value (non-Link monsters only).",
+            "example": 2100
+          },
+          "level": {
+            "type": "integer",
+            "description": "Card level or rank (monsters only).",
+            "example": 7
+          },
+          "attribute": {
+            "type": "string",
+            "description": "Monster attribute.",
+            "enum": [
+              "DARK",
+              "LIGHT",
+              "WATER",
+              "FIRE",
+              "WIND",
+              "EARTH",
+              "DIVINE"
+            ],
+            "example": "DARK"
+          },
+          "linkval": {
+            "type": "integer",
+            "description": "Link rating (Link Monsters only).",
+            "example": 4
+          },
+          "linkmarkers": {
+            "type": "array",
+            "description": "Link marker positions (Link Monsters only).",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Top",
+                "Bottom",
+                "Left",
+                "Right",
+                "Top-Left",
+                "Top-Right",
+                "Bottom-Left",
+                "Bottom-Right"
+              ]
+            },
+            "example": [
+              "Top",
+              "Bottom-Left",
+              "Bottom-Right"
+            ]
+          },
+          "scale": {
+            "type": "integer",
+            "description": "Pendulum scale value (Pendulum monsters only).",
+            "example": 4
+          },
+          "archetype": {
+            "type": "string",
+            "description": "Archetype the card belongs to (e.g. `Blue-Eyes`, `Dark Magician`).",
+            "example": "Dark Magician"
+          },
+          "ygoprodeck_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Canonical YGOPRODeck card page URL.",
+            "example": "https://ygoprodeck.com/card/dark-magician-4087"
+          },
+          "card_sets": {
+            "type": "array",
+            "description": "Every set printing this card has appeared in.",
+            "items": {
+              "$ref": "#/components/schemas/CardPrintingEntry"
+            }
+          },
+          "card_images": {
+            "type": "array",
+            "description": "Available image URLs for each artwork variant of this card.",
+            "items": {
+              "$ref": "#/components/schemas/CardImage"
+            }
+          },
+          "card_prices": {
+            "type": "array",
+            "description": "Marketplace prices aggregated across Cardmarket, TCGplayer, eBay, Amazon, and CoolStuffInc.",
+            "items": {
+              "$ref": "#/components/schemas/CardPrice"
+            }
+          },
+          "misc_info": {
+            "type": "array",
+            "description": "Extended metadata, present only when the search was made with `misc=yes`.",
+            "items": {
+              "$ref": "#/components/schemas/CardMiscInfo"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "frameType",
+          "desc"
+        ]
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Pagination metadata included when `num` and `offset` are used.",
+      "properties": {
+        "current_rows": {
+          "type": "integer",
+          "description": "Number of rows in the current page.",
+          "example": 20
+        },
+        "total_rows": {
+          "type": "integer",
+          "description": "Total number of rows matched by the query.",
+          "example": 144
+        },
+        "rows_remaining": {
+          "type": "integer",
+          "description": "Rows remaining after this page.",
+          "example": 124
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "Total number of pages.",
+          "example": 8
+        },
+        "pages_remaining": {
+          "type": "integer",
+          "description": "Pages remaining after this one.",
+          "example": 7
+        },
+        "next_page": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for the next page."
+        },
+        "next_page_offset": {
+          "type": "integer",
+          "description": "Offset value for the next page."
+        }
+      }
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

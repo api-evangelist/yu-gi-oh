@@ -1,0 +1,295 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YGOPRODeck — Cards
+  description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Cards. 2 operations. Lead operation: Search Cards. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Cards
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+  - namespace: env
+    keys: {}
+capability:
+  consumes:
+    - type: http
+      namespace: ygoprodeck-cards
+      baseUri: https://db.ygoprodeck.com/api/v7
+      description: YGOPRODeck Yu-Gi-Oh! Card Database API — Cards business capability. Self-contained, no shared references.
+      resources:
+        - name: cardinfo
+          path: /cardinfo.php
+          operations:
+            - name: searchCards
+              method: GET
+              description: YGOPRODeck Search Cards
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: name
+                  in: query
+                  type: string
+                  required: false
+                  description: Exact card name. Use a pipe (`|`) to query multiple names in one call (e.g. `Baby Dragon|Time Wizard`).
+                - name: fname
+                  in: query
+                  type: string
+                  required: false
+                  description: Fuzzy / partial card name search.
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: Card passcode (8-digit numeric id). Comma-separated for multiple ids.
+                - name: konami_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Konami official card id (different from the printed passcode).
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: Card type (e.g. `Effect Monster`, `Synchro Monster`, `Spell Card`, `Trap Card`, `Link Monster`).
+                - name: race
+                  in: query
+                  type: string
+                  required: false
+                  description: Monster race (for monsters) or sub-type (for Spell/Trap, e.g. `Continuous`, `Quick-Play`, `Counter`).
+                - name: attribute
+                  in: query
+                  type: string
+                  required: false
+                  description: Monster attribute.
+                - name: level
+                  in: query
+                  type: string
+                  required: false
+                  description: Monster level or rank. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte4`).
+                - name: link
+                  in: query
+                  type: integer
+                  required: false
+                  description: Link rating for Link Monsters.
+                - name: linkmarker
+                  in: query
+                  type: string
+                  required: false
+                  description: Link marker positions (one or more, comma-separated). Values are `Top`, `Bottom`, `Left`, `Right`, `Top-Left`, `Top-Right`, `Bottom-Left`, `Bottom-Right`.
+                - name: atk
+                  in: query
+                  type: string
+                  required: false
+                  description: ATK value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte2500`).
+                - name: def
+                  in: query
+                  type: string
+                  required: false
+                  description: DEF value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte`.
+                - name: scale
+                  in: query
+                  type: integer
+                  required: false
+                  description: Pendulum scale value.
+                - name: archetype
+                  in: query
+                  type: string
+                  required: false
+                  description: Archetype name (see `/archetypes.php` for the complete list).
+                - name: cardset
+                  in: query
+                  type: string
+                  required: false
+                  description: Card set name (see `/cardsets.php` for the complete list).
+                - name: banlist
+                  in: query
+                  type: string
+                  required: false
+                  description: Banlist type to filter against.
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: Tournament format legality filter.
+                - name: staple
+                  in: query
+                  type: string
+                  required: false
+                  description: Pass `yes` to filter to staple cards only.
+                - name: has_effect
+                  in: query
+                  type: boolean
+                  required: false
+                  description: Pass `true` or `false` to filter cards by whether they have an actual effect.
+                - name: sort
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order for the result set.
+                - name: misc
+                  in: query
+                  type: string
+                  required: false
+                  description: Pass `yes` to include extended metadata (views, upvotes, formats, treated_as, release dates, konami_id, md_rarity, has_effect, genesys_points).
+                - name: tcgplayer_data
+                  in: query
+                  type: string
+                  required: false
+                  description: Pass `yes` to use TCGplayer card set data instead of the default.
+                - name: language
+                  in: query
+                  type: string
+                  required: false
+                  description: Language code for card text. Default is English (omit). Supported alternatives are `fr`, `de`, `it`, `pt`.
+                - name: startdate
+                  in: query
+                  type: string
+                  required: false
+                  description: Start date (`YYYY-MM-DD`) for release-date filtering.
+                - name: enddate
+                  in: query
+                  type: string
+                  required: false
+                  description: End date (`YYYY-MM-DD`) for release-date filtering.
+                - name: dateregion
+                  in: query
+                  type: string
+                  required: false
+                  description: Region whose release dates the `startdate`/`enddate` window applies to (e.g. `tcg_date`, `ocg_date`).
+                - name: num
+                  in: query
+                  type: integer
+                  required: false
+                  description: Page size (results per page). Pair with `offset` for pagination.
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Pagination offset (0-based).
+        - name: randomcard
+          path: /randomcard.php
+          operations:
+            - name: getRandomCard
+              method: GET
+              description: YGOPRODeck Get Random Card
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: ygoprodeck-cards-rest
+      port: 8080
+      description: REST adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Cards. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/cardinfo
+          name: cardinfo
+          description: REST surface for cardinfo.
+          operations:
+            - method: GET
+              name: searchCards
+              description: YGOPRODeck Search Cards
+              call: ygoprodeck-cards.searchCards
+              outputParameters:
+                - type: object
+                  mapping: $.
+              with:
+                name: rest.name
+                fname: rest.fname
+                id: rest.id
+                konami_id: rest.konami_id
+                type: rest.type
+                race: rest.race
+                attribute: rest.attribute
+                level: rest.level
+                link: rest.link
+                linkmarker: rest.linkmarker
+                atk: rest.atk
+                def: rest.def
+                scale: rest.scale
+                archetype: rest.archetype
+                cardset: rest.cardset
+                banlist: rest.banlist
+                format: rest.format
+                staple: rest.staple
+                has_effect: rest.has_effect
+                sort: rest.sort
+                misc: rest.misc
+                tcgplayer_data: rest.tcgplayer_data
+                language: rest.language
+                startdate: rest.startdate
+                enddate: rest.enddate
+                dateregion: rest.dateregion
+                num: rest.num
+                offset: rest.offset
+        - path: /v1/randomcard
+          name: randomcard
+          description: REST surface for randomcard.
+          operations:
+            - method: GET
+              name: getRandomCard
+              description: YGOPRODeck Get Random Card
+              call: ygoprodeck-cards.getRandomCard
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: ygoprodeck-cards-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Cards. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: search-cards
+          description: YGOPRODeck Search Cards
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-cards.searchCards
+          outputParameters:
+            - type: object
+              mapping: $.
+          with:
+            name: tools.name
+            fname: tools.fname
+            id: tools.id
+            konami_id: tools.konami_id
+            type: tools.type
+            race: tools.race
+            attribute: tools.attribute
+            level: tools.level
+            link: tools.link
+            linkmarker: tools.linkmarker
+            atk: tools.atk
+            def: tools.def
+            scale: tools.scale
+            archetype: tools.archetype
+            cardset: tools.cardset
+            banlist: tools.banlist
+            format: tools.format
+            staple: tools.staple
+            has_effect: tools.has_effect
+            sort: tools.sort
+            misc: tools.misc
+            tcgplayer_data: tools.tcgplayer_data
+            language: tools.language
+            startdate: tools.startdate
+            enddate: tools.enddate
+            dateregion: tools.dateregion
+            num: tools.num
+            offset: tools.offset
+        - name: get-random-card
+          description: YGOPRODeck Get Random Card
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-cards.getRandomCard
+          outputParameters:
+            - type: object
+              mapping: $.

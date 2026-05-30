@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-set-schema.json",
+  "title": "CardSet",
+  "description": "A Yu-Gi-Oh! card set (booster pack, structure deck, tin, etc.).",
+  "type": "object",
+  "properties": {
+    "set_name": {
+      "type": "string",
+      "description": "Set name.",
+      "example": "Legend of Blue Eyes White Dragon"
+    },
+    "set_code": {
+      "type": "string",
+      "description": "Set code prefix (e.g. `LOB`).",
+      "example": "LOB"
+    },
+    "num_of_cards": {
+      "type": "integer",
+      "description": "Number of cards in the set.",
+      "example": 126
+    },
+    "tcg_date": {
+      "type": "string",
+      "format": "date",
+      "description": "TCG release date.",
+      "example": "2002-03-08"
+    },
+    "set_image": {
+      "type": "string",
+      "format": "uri",
+      "description": "Set image URL.",
+      "example": "https://images.ygoprodeck.com/images/sets/LOB.jpg"
+    }
+  },
+  "required": [
+    "set_name",
+    "set_code"
+  ]
+}

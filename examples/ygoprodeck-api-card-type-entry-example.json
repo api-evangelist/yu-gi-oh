@@ -1,0 +1,9 @@
+{
+  "name": "Effect Monster",
+  "group": "MONSTER",
+  "sortGroup": 2,
+  "area": [
+    "MAIN",
+    "SIDE"
+  ]
+}

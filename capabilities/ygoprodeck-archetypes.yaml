@@ -1,0 +1,64 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YGOPRODeck — Archetypes
+  description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Archetypes. 1 operations. Lead operation: List Archetypes. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Archetypes
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+  - namespace: env
+    keys: {}
+capability:
+  consumes:
+    - type: http
+      namespace: ygoprodeck-archetypes
+      baseUri: https://db.ygoprodeck.com/api/v7
+      description: YGOPRODeck Yu-Gi-Oh! Card Database API — Archetypes business capability. Self-contained, no shared references.
+      resources:
+        - name: archetypes
+          path: /archetypes.php
+          operations:
+            - name: listArchetypes
+              method: GET
+              description: YGOPRODeck List Archetypes
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: ygoprodeck-archetypes-rest
+      port: 8080
+      description: REST adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Archetypes. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/archetypes
+          name: archetypes
+          description: REST surface for archetypes.
+          operations:
+            - method: GET
+              name: listArchetypes
+              description: YGOPRODeck List Archetypes
+              call: ygoprodeck-archetypes.listArchetypes
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: ygoprodeck-archetypes-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Archetypes. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: list-archetypes
+          description: YGOPRODeck List Archetypes
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-archetypes.listArchetypes
+          outputParameters:
+            - type: object
+              mapping: $.

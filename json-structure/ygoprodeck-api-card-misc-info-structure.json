@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-card-misc-info-structure.json",
+  "name": "CardMiscInfo",
+  "description": "Extended per-card metadata returned only when `misc=yes` is passed to `/cardinfo.php`.",
+  "type": "object",
+  "properties": {
+    "beta_name": {
+      "type": "string",
+      "description": "Original beta name (if different from the released name)."
+    },
+    "views": {
+      "type": "int32",
+      "description": "YGOPRODeck card page view count.",
+      "example": 152340
+    },
+    "viewsweek": {
+      "type": "int32",
+      "description": "YGOPRODeck card page view count over the last 7 days.",
+      "example": 421
+    },
+    "upvotes": {
+      "type": "int32",
+      "description": "Community upvote count.",
+      "example": 540
+    },
+    "downvotes": {
+      "type": "int32",
+      "description": "Community downvote count.",
+      "example": 12
+    },
+    "formats": {
+      "type": "array",
+      "description": "Tournament formats the card is legal in.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "TCG",
+        "OCG",
+        "Master Duel"
+      ]
+    },
+    "treated_as": {
+      "type": "string",
+      "description": "An alternate card name this card is officially treated as (for ruling purposes)."
+    },
+    "tcg_date": {
+      "type": "date",
+      "description": "TCG (English) release date.",
+      "example": "2002-03-08"
+    },
+    "ocg_date": {
+      "type": "date",
+      "description": "OCG (Japanese) release date.",
+      "example": "1999-02-04"
+    },
+    "konami_id": {
+      "type": "int32",
+      "description": "Internal Konami card id.",
+      "example": 4007
+    },
+    "has_effect": {
+      "type": "int32",
+      "description": "1 if the card has an actual rules effect; 0 if not.",
+      "example": 0
+    },
+    "md_rarity": {
+      "type": "string",
+      "description": "Master Duel rarity (if applicable).",
+      "example": "UR"
+    },
+    "genesys_points": {
+      "type": "int32",
+      "description": "GenesYS-format point cost. Only returned when `format=genesys` is passed.",
+      "example": 100
+    },
+    "question_atk": {
+      "type": "int32",
+      "description": "1 if the card has `?` as ATK (special-case Pendulum/Effect ATK)."
+    },
+    "question_def": {
+      "type": "int32",
+      "description": "1 if the card has `?` as DEF."
+    },
+    "staple": {
+      "type": "string",
+      "description": "`yes` if YGOPRODeck classifies this card as a staple in any format."
+    }
+  }
+}

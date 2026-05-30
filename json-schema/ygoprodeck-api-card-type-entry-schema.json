@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-type-entry-schema.json",
+  "title": "CardTypeEntry",
+  "description": "Metadata for a single card type used by sort/filter UIs.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Card type name.",
+      "example": "Effect Monster"
+    },
+    "group": {
+      "type": "string",
+      "description": "Top-level card class.",
+      "enum": [
+        "MONSTER",
+        "SPELL",
+        "TRAP",
+        "SKILL"
+      ],
+      "example": "MONSTER"
+    },
+    "sortGroup": {
+      "type": "integer",
+      "description": "Sort order for displaying types together.",
+      "example": 2
+    },
+    "area": {
+      "type": "array",
+      "description": "Deck areas where this type may be placed.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "MAIN",
+          "EXTRA",
+          "SIDE"
+        ]
+      },
+      "example": [
+        "MAIN",
+        "SIDE"
+      ]
+    }
+  }
+}

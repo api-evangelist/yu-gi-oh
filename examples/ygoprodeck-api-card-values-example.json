@@ -1,0 +1,54 @@
+{
+  "types": [
+    {
+      "name": "Effect Monster",
+      "group": "MONSTER",
+      "sortGroup": 2,
+      "area": [
+        "MAIN",
+        "SIDE"
+      ]
+    }
+  ],
+  "MONSTER": {
+    "type": [
+      "Normal Monster"
+    ],
+    "race": [
+      "Spellcaster"
+    ],
+    "attributes": [
+      "DARK"
+    ],
+    "level": [
+      7
+    ],
+    "linkmarkers": [
+      "example"
+    ]
+  },
+  "SPELL": {
+    "type": [
+      "Normal Monster"
+    ],
+    "race": [
+      "Spellcaster"
+    ]
+  },
+  "TRAP": {
+    "type": [
+      "Normal Monster"
+    ],
+    "race": [
+      "Spellcaster"
+    ]
+  },
+  "SKILL": {
+    "type": [
+      "Normal Monster"
+    ],
+    "race": [
+      "Spellcaster"
+    ]
+  }
+}

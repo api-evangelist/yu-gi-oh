@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-class-values-schema.json",
+  "title": "CardClassValues",
+  "description": "Valid values for a non-monster card class (Spell, Trap, or Skill).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "array",
+      "description": "Types within this card class.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "race": {
+      "type": "array",
+      "description": "Sub-types or races within this card class.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

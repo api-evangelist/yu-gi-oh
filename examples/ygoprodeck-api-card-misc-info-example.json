@@ -1,0 +1,22 @@
+{
+  "beta_name": "example",
+  "views": 152340,
+  "viewsweek": 421,
+  "upvotes": 540,
+  "downvotes": 12,
+  "formats": [
+    "TCG",
+    "OCG",
+    "Master Duel"
+  ],
+  "treated_as": "example",
+  "tcg_date": "2002-03-08",
+  "ocg_date": "1999-02-04",
+  "konami_id": 4007,
+  "has_effect": 0,
+  "md_rarity": "UR",
+  "genesys_points": 100,
+  "question_atk": 2500,
+  "question_def": 2100,
+  "staple": "example"
+}

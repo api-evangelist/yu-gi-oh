@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-card-structure.json",
+  "name": "Card",
+  "description": "A single Yu-Gi-Oh! card, including metadata, set printings, image URLs, and marketplace prices.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "8-digit Yu-Gi-Oh! card passcode (unique per card).",
+      "example": 46986414
+    },
+    "name": {
+      "type": "string",
+      "description": "Card name (in the requested language).",
+      "example": "Dark Magician"
+    },
+    "typeline": {
+      "type": "array",
+      "description": "Type line tokens (e.g. `[\"Spellcaster\", \"Normal\"]`).",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Spellcaster",
+        "Normal"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Card type (e.g. `Normal Monster`, `Effect Monster`, `Spell Card`, `Trap Card`, `Link Monster`).",
+      "example": "Normal Monster"
+    },
+    "humanReadableCardType": {
+      "type": "string",
+      "description": "Human-friendly version of the card type.",
+      "example": "Normal Monster"
+    },
+    "frameType": {
+      "type": "string",
+      "description": "The card frame style (e.g. `normal`, `effect`, `synchro`, `xyz`, `link`, `spell`, `trap`).",
+      "example": "normal"
+    },
+    "desc": {
+      "type": "string",
+      "description": "Card effect / flavour text.",
+      "example": "The ultimate wizard in terms of attack and defense."
+    },
+    "race": {
+      "type": "string",
+      "description": "Monster race (e.g. `Spellcaster`, `Dragon`) or Spell/Trap sub-type (`Continuous`, `Quick-Play`, `Counter`).",
+      "example": "Spellcaster"
+    },
+    "atk": {
+      "type": "int32",
+      "description": "Attack value (monsters only).",
+      "example": 2500
+    },
+    "def": {
+      "type": "int32",
+      "description": "Defense value (non-Link monsters only).",
+      "example": 2100
+    },
+    "level": {
+      "type": "int32",
+      "description": "Card level or rank (monsters only).",
+      "example": 7
+    },
+    "attribute": {
+      "type": "string",
+      "description": "Monster attribute.",
+      "enum": [
+        "DARK",
+        "LIGHT",
+        "WATER",
+        "FIRE",
+        "WIND",
+        "EARTH",
+        "DIVINE"
+      ],
+      "example": "DARK"
+    },
+    "linkval": {
+      "type": "int32",
+      "description": "Link rating (Link Monsters only).",
+      "example": 4
+    },
+    "linkmarkers": {
+      "type": "array",
+      "description": "Link marker positions (Link Monsters only).",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Top",
+          "Bottom",
+          "Left",
+          "Right",
+          "Top-Left",
+          "Top-Right",
+          "Bottom-Left",
+          "Bottom-Right"
+        ]
+      },
+      "example": [
+        "Top",
+        "Bottom-Left",
+        "Bottom-Right"
+      ]
+    },
+    "scale": {
+      "type": "int32",
+      "description": "Pendulum scale value (Pendulum monsters only).",
+      "example": 4
+    },
+    "archetype": {
+      "type": "string",
+      "description": "Archetype the card belongs to (e.g. `Blue-Eyes`, `Dark Magician`).",
+      "example": "Dark Magician"
+    },
+    "ygoprodeck_url": {
+      "type": "uri",
+      "description": "Canonical YGOPRODeck card page URL.",
+      "example": "https://ygoprodeck.com/card/dark-magician-4087"
+    },
+    "card_sets": {
+      "type": "array",
+      "description": "Every set printing this card has appeared in.",
+      "items": {
+        "type": "object",
+        "description": "A single set printing of a card.",
+        "properties": {
+          "set_name": {
+            "type": "string",
+            "description": "Set name (e.g. `Legend of Blue Eyes White Dragon`).",
+            "example": "Legend of Blue Eyes White Dragon"
+          },
+          "set_code": {
+            "type": "string",
+            "description": "Set code identifying this printing (e.g. `LOB-EN001`).",
+            "example": "LOB-EN001"
+          },
+          "set_rarity": {
+            "type": "string",
+            "description": "Rarity of this printing.",
+            "example": "Ultra Rare"
+          },
+          "set_rarity_code": {
+            "type": "string",
+            "description": "Short rarity code (e.g. `(UR)`).",
+            "example": "(UR)"
+          },
+          "set_price": {
+            "type": "string",
+            "description": "Price of this printing (USD, stringified decimal).",
+            "example": "6.97"
+          }
+        },
+        "required": [
+          "set_name",
+          "set_code",
+          "set_rarity"
+        ]
+      }
+    },
+    "card_images": {
+      "type": "array",
+      "description": "Available image URLs for each artwork variant of this card.",
+      "items": {
+        "type": "object",
+        "description": "Image URLs for a single artwork variant of a card.",
+        "properties": {
+          "id": {
+            "type": "int32",
+            "description": "Image id (matches the card id for the default artwork; differs for alternate artworks).",
+            "example": 46986414
+          },
+          "image_url": {
+            "type": "uri",
+            "description": "Full-size card image URL. Do not hotlink \u2014 download and self-host.",
+            "example": "https://images.ygoprodeck.com/images/cards/46986414.jpg"
+          },
+          "image_url_small": {
+            "type": "uri",
+            "description": "Small / thumbnail image URL.",
+            "example": "https://images.ygoprodeck.com/images/cards_small/46986414.jpg"
+          },
+          "image_url_cropped": {
+            "type": "uri",
+            "description": "Cropped artwork-only image URL (no frame).",
+            "example": "https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg"
+          }
+        },
+        "required": [
+          "id",
+          "image_url",
+          "image_url_small",
+          "image_url_cropped"
+        ]
+      }
+    },
+    "card_prices": {
+      "type": "array",
+      "description": "Marketplace prices aggregated across Cardmarket, TCGplayer, eBay, Amazon, and CoolStuffInc.",
+      "items": {
+        "type": "object",
+        "description": "Marketplace prices for a card (USD, stringified decimal).",
+        "properties": {
+          "cardmarket_price": {
+            "type": "string",
+            "description": "Cardmarket price (USD).",
+            "example": "0.02"
+          },
+          "tcgplayer_price": {
+            "type": "string",
+            "description": "TCGplayer price (USD).",
+            "example": "0.24"
+          },
+          "ebay_price": {
+            "type": "string",
+            "description": "eBay price (USD).",
+            "example": "0.99"
+          },
+          "amazon_price": {
+            "type": "string",
+            "description": "Amazon price (USD).",
+            "example": "14.45"
+          },
+          "coolstuffinc_price": {
+            "type": "string",
+            "description": "CoolStuffInc price (USD).",
+            "example": "0.39"
+          }
+        }
+      }
+    },
+    "misc_info": {
+      "type": "array",
+      "description": "Extended metadata, present only when the search was made with `misc=yes`.",
+      "items": {
+        "type": "object",
+        "description": "Extended per-card metadata returned only when `misc=yes` is passed to `/cardinfo.php`.",
+        "properties": {
+          "beta_name": {
+            "type": "string",
+            "description": "Original beta name (if different from the released name)."
+          },
+          "views": {
+            "type": "int32",
+            "description": "YGOPRODeck card page view count.",
+            "example": 152340
+          },
+          "viewsweek": {
+            "type": "int32",
+            "description": "YGOPRODeck card page view count over the last 7 days.",
+            "example": 421
+          },
+          "upvotes": {
+            "type": "int32",
+            "description": "Community upvote count.",
+            "example": 540
+          },
+          "downvotes": {
+            "type": "int32",
+            "description": "Community downvote count.",
+            "example": 12
+          },
+          "formats": {
+            "type": "array",
+            "description": "Tournament formats the card is legal in.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TCG",
+              "OCG",
+              "Master Duel"
+            ]
+          },
+          "treated_as": {
+            "type": "string",
+            "description": "An alternate card name this card is officially treated as (for ruling purposes)."
+          },
+          "tcg_date": {
+            "type": "date",
+            "description": "TCG (English) release date.",
+            "example": "2002-03-08"
+          },
+          "ocg_date": {
+            "type": "date",
+            "description": "OCG (Japanese) release date.",
+            "example": "1999-02-04"
+          },
+          "konami_id": {
+            "type": "int32",
+            "description": "Internal Konami card id.",
+            "example": 4007
+          },
+          "has_effect": {
+            "type": "int32",
+            "description": "1 if the card has an actual rules effect; 0 if not.",
+            "example": 0
+          },
+          "md_rarity": {
+            "type": "string",
+            "description": "Master Duel rarity (if applicable).",
+            "example": "UR"
+          },
+          "genesys_points": {
+            "type": "int32",
+            "description": "GenesYS-format point cost. Only returned when `format=genesys` is passed.",
+            "example": 100
+          },
+          "question_atk": {
+            "type": "int32",
+            "description": "1 if the card has `?` as ATK (special-case Pendulum/Effect ATK)."
+          },
+          "question_def": {
+            "type": "int32",
+            "description": "1 if the card has `?` as DEF."
+          },
+          "staple": {
+            "type": "string",
+            "description": "`yes` if YGOPRODeck classifies this card as a staple in any format."
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "type",
+    "frameType",
+    "desc"
+  ]
+}

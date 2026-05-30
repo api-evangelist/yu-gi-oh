@@ -1,0 +1,106 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YGOPRODeck — Card Sets
+  description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Card Sets. 2 operations. Lead operation: List Card Sets. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Card Sets
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+  - namespace: env
+    keys: {}
+capability:
+  consumes:
+    - type: http
+      namespace: ygoprodeck-card-sets
+      baseUri: https://db.ygoprodeck.com/api/v7
+      description: YGOPRODeck Yu-Gi-Oh! Card Database API — Card Sets business capability. Self-contained, no shared references.
+      resources:
+        - name: cardsets
+          path: /cardsets.php
+          operations:
+            - name: listCardSets
+              method: GET
+              description: YGOPRODeck List Card Sets
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: cardsetsinfo
+          path: /cardsetsinfo.php
+          operations:
+            - name: getCardSetInfo
+              method: GET
+              description: YGOPRODeck Get Card Set Print Info
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: setcode
+                  in: query
+                  type: string
+                  required: true
+                  description: Set code identifying a specific card printing (e.g. `LOB-EN001`).
+  exposes:
+    - type: rest
+      namespace: ygoprodeck-card-sets-rest
+      port: 8080
+      description: REST adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Card Sets. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/cardsets
+          name: cardsets
+          description: REST surface for cardsets.
+          operations:
+            - method: GET
+              name: listCardSets
+              description: YGOPRODeck List Card Sets
+              call: ygoprodeck-card-sets.listCardSets
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/cardsetsinfo
+          name: cardsetsinfo
+          description: REST surface for cardsetsinfo.
+          operations:
+            - method: GET
+              name: getCardSetInfo
+              description: YGOPRODeck Get Card Set Print Info
+              call: ygoprodeck-card-sets.getCardSetInfo
+              outputParameters:
+                - type: object
+                  mapping: $.
+              with:
+                setcode: rest.setcode
+    - type: mcp
+      namespace: ygoprodeck-card-sets-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Card Sets. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: list-card-sets
+          description: YGOPRODeck List Card Sets
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-card-sets.listCardSets
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-card-set-info
+          description: YGOPRODeck Get Card Set Print Info
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-card-sets.getCardSetInfo
+          outputParameters:
+            - type: object
+              mapping: $.
+          with:
+            setcode: tools.setcode

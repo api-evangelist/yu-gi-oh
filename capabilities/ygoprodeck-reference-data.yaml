@@ -1,0 +1,64 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YGOPRODeck — Reference Data
+  description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Reference Data. 1 operations. Lead operation: Get Valid Card Filter Values. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Reference Data
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+  - namespace: env
+    keys: {}
+capability:
+  consumes:
+    - type: http
+      namespace: ygoprodeck-reference-data
+      baseUri: https://db.ygoprodeck.com/api/v7
+      description: YGOPRODeck Yu-Gi-Oh! Card Database API — Reference Data business capability. Self-contained, no shared references.
+      resources:
+        - name: cardvalues
+          path: /cardvalues.php
+          operations:
+            - name: getCardValues
+              method: GET
+              description: YGOPRODeck Get Valid Card Filter Values
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: ygoprodeck-reference-data-rest
+      port: 8080
+      description: REST adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Reference Data. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/cardvalues
+          name: cardvalues
+          description: REST surface for cardvalues.
+          operations:
+            - method: GET
+              name: getCardValues
+              description: YGOPRODeck Get Valid Card Filter Values
+              call: ygoprodeck-reference-data.getCardValues
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: ygoprodeck-reference-data-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Reference Data. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-card-values
+          description: YGOPRODeck Get Valid Card Filter Values
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-reference-data.getCardValues
+          outputParameters:
+            - type: object
+              mapping: $.

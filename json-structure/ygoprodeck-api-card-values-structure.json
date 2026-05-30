@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-card-values-structure.json",
+  "name": "CardValues",
+  "description": "Valid value enumerations used by the search engine, broken down by card class.",
+  "type": "object",
+  "properties": {
+    "types": {
+      "type": "array",
+      "description": "Every card type with its group and sort order.",
+      "items": {
+        "type": "object",
+        "description": "Metadata for a single card type used by sort/filter UIs.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Card type name.",
+            "example": "Effect Monster"
+          },
+          "group": {
+            "type": "string",
+            "description": "Top-level card class.",
+            "enum": [
+              "MONSTER",
+              "SPELL",
+              "TRAP",
+              "SKILL"
+            ],
+            "example": "MONSTER"
+          },
+          "sortGroup": {
+            "type": "int32",
+            "description": "Sort order for displaying types together.",
+            "example": 2
+          },
+          "area": {
+            "type": "array",
+            "description": "Deck areas where this type may be placed.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MAIN",
+                "EXTRA",
+                "SIDE"
+              ]
+            },
+            "example": [
+              "MAIN",
+              "SIDE"
+            ]
+          }
+        }
+      }
+    },
+    "MONSTER": {
+      "type": "object",
+      "description": "Valid values for monster filters.",
+      "properties": {
+        "type": {
+          "type": "array",
+          "description": "All monster types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "race": {
+          "type": "array",
+          "description": "All monster races.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "description": "All monster attributes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "level": {
+          "type": "array",
+          "description": "Valid monster levels / ranks.",
+          "items": {
+            "type": "int32"
+          }
+        },
+        "linkmarkers": {
+          "type": "array",
+          "description": "Valid link marker positions.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SPELL": {
+      "type": "object",
+      "description": "Valid values for a non-monster card class (Spell, Trap, or Skill).",
+      "properties": {
+        "type": {
+          "type": "array",
+          "description": "Types within this card class.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "race": {
+          "type": "array",
+          "description": "Sub-types or races within this card class.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TRAP": {
+      "type": "object",
+      "description": "Valid values for a non-monster card class (Spell, Trap, or Skill).",
+      "properties": {
+        "type": {
+          "type": "array",
+          "description": "Types within this card class.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "race": {
+          "type": "array",
+          "description": "Sub-types or races within this card class.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SKILL": {
+      "type": "object",
+      "description": "Valid values for a non-monster card class (Spell, Trap, or Skill).",
+      "properties": {
+        "type": {
+          "type": "array",
+          "description": "Types within this card class.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "race": {
+          "type": "array",
+          "description": "Sub-types or races within this card class.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

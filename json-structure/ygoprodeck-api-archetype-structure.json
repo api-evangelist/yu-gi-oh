@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-archetype-structure.json",
+  "name": "Archetype",
+  "description": "A recognised Yu-Gi-Oh! archetype.",
+  "type": "object",
+  "properties": {
+    "archetype_name": {
+      "type": "string",
+      "description": "Archetype name.",
+      "example": "Blue-Eyes"
+    }
+  },
+  "required": [
+    "archetype_name"
+  ]
+}

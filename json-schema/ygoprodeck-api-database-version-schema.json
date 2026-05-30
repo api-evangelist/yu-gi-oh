@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-database-version-schema.json",
+  "title": "DatabaseVersion",
+  "description": "Current YGOPRODeck card database version.",
+  "type": "object",
+  "properties": {
+    "database_version": {
+      "type": "string",
+      "description": "Database version (semver-like).",
+      "example": "145.46"
+    },
+    "last_update": {
+      "type": "string",
+      "description": "Last update timestamp (`YYYY-MM-DD HH:MM:SS`, UTC).",
+      "example": "2026-05-22 16:00:23"
+    }
+  },
+  "required": [
+    "database_version",
+    "last_update"
+  ]
+}

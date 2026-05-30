@@ -1,0 +1,64 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YGOPRODeck — Database
+  description: 'YGOPRODeck Yu-Gi-Oh! Card Database API — Database. 1 operations. Lead operation: Get Database Version. Self-contained Naftiko capability covering one YGOPRODeck business surface.'
+  tags:
+    - YGOPRODeck
+    - Yu-Gi-Oh
+    - Database
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+  - namespace: env
+    keys: {}
+capability:
+  consumes:
+    - type: http
+      namespace: ygoprodeck-database
+      baseUri: https://db.ygoprodeck.com/api/v7
+      description: YGOPRODeck Yu-Gi-Oh! Card Database API — Database business capability. Self-contained, no shared references.
+      resources:
+        - name: check-dbver
+          path: /checkDBVer.php
+          operations:
+            - name: getDatabaseVersion
+              method: GET
+              description: YGOPRODeck Get Database Version
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: ygoprodeck-database-rest
+      port: 8080
+      description: REST adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Database. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/check-dbver
+          name: check-dbver
+          description: REST surface for check-dbver.
+          operations:
+            - method: GET
+              name: getDatabaseVersion
+              description: YGOPRODeck Get Database Version
+              call: ygoprodeck-database.getDatabaseVersion
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: ygoprodeck-database-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for YGOPRODeck Yu-Gi-Oh! Card Database API — Database. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-database-version
+          description: YGOPRODeck Get Database Version
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: ygoprodeck-database.getDatabaseVersion
+          outputParameters:
+            - type: object
+              mapping: $.

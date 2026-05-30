@@ -1,0 +1,326 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ygo": "https://ygoprodeck.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Card": "ygo:Card",
+    "CardPrintingEntry": "ygo:CardPrintingEntry",
+    "CardImage": "ygo:CardImage",
+    "CardPrice": "ygo:CardPrice",
+    "CardMiscInfo": "ygo:CardMiscInfo",
+    "CardSet": "ygo:CardSet",
+    "CardSetPrint": "ygo:CardSetPrint",
+    "Archetype": "ygo:Archetype",
+    "CardValues": "ygo:CardValues",
+    "CardTypeEntry": "ygo:CardTypeEntry",
+    "MonsterValues": "ygo:MonsterValues",
+    "CardClassValues": "ygo:CardClassValues",
+    "DatabaseVersion": "ygo:DatabaseVersion",
+    "CardSearchResponse": "ygo:CardSearchResponse",
+    "SearchMeta": "ygo:SearchMeta",
+    "MONSTER": {
+      "@id": "ygo:MONSTER",
+      "@type": "@id"
+    },
+    "SKILL": {
+      "@id": "ygo:SKILL",
+      "@type": "@id"
+    },
+    "SPELL": {
+      "@id": "ygo:SPELL",
+      "@type": "@id"
+    },
+    "TRAP": {
+      "@id": "ygo:TRAP",
+      "@type": "@id"
+    },
+    "amazonPrice": {
+      "@id": "ygo:amazon_price",
+      "@type": "xsd:string"
+    },
+    "archetype": {
+      "@id": "ygo:archetype",
+      "@type": "xsd:string"
+    },
+    "archetypeName": {
+      "@id": "ygo:archetype_name",
+      "@type": "xsd:string"
+    },
+    "area": {
+      "@id": "ygo:area",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "atk": {
+      "@id": "ygo:atk",
+      "@type": "xsd:integer"
+    },
+    "attribute": {
+      "@id": "ygo:attribute",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "ygo:attributes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "betaName": {
+      "@id": "ygo:beta_name",
+      "@type": "xsd:string"
+    },
+    "cardImages": {
+      "@id": "ygo:card_images",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "cardPrices": {
+      "@id": "ygo:card_prices",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "cardSets": {
+      "@id": "ygo:card_sets",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "cardmarketPrice": {
+      "@id": "ygo:cardmarket_price",
+      "@type": "xsd:string"
+    },
+    "coolstuffincPrice": {
+      "@id": "ygo:coolstuffinc_price",
+      "@type": "xsd:string"
+    },
+    "currentRows": {
+      "@id": "ygo:current_rows",
+      "@type": "xsd:integer"
+    },
+    "data": {
+      "@id": "ygo:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "databaseVersion": {
+      "@id": "ygo:database_version",
+      "@type": "xsd:string"
+    },
+    "def": {
+      "@id": "ygo:def",
+      "@type": "xsd:integer"
+    },
+    "desc": {
+      "@id": "ygo:desc",
+      "@type": "xsd:string"
+    },
+    "downvotes": {
+      "@id": "ygo:downvotes",
+      "@type": "xsd:integer"
+    },
+    "ebayPrice": {
+      "@id": "ygo:ebay_price",
+      "@type": "xsd:string"
+    },
+    "formats": {
+      "@id": "ygo:formats",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "frameType": {
+      "@id": "ygo:frameType",
+      "@type": "xsd:string"
+    },
+    "genesysPoints": {
+      "@id": "ygo:genesys_points",
+      "@type": "xsd:integer"
+    },
+    "group": {
+      "@id": "ygo:group",
+      "@type": "xsd:string"
+    },
+    "hasEffect": {
+      "@id": "ygo:has_effect",
+      "@type": "xsd:integer"
+    },
+    "humanReadableCardType": {
+      "@id": "ygo:humanReadableCardType",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "ygo:id",
+      "@type": "xsd:integer"
+    },
+    "imageUrl": {
+      "@id": "schema:image"
+    },
+    "imageUrlCropped": {
+      "@id": "ygo:image_url_cropped",
+      "@type": "@id"
+    },
+    "imageUrlSmall": {
+      "@id": "ygo:image_url_small",
+      "@type": "@id"
+    },
+    "konamiId": {
+      "@id": "ygo:konami_id",
+      "@type": "xsd:integer"
+    },
+    "lastUpdate": {
+      "@id": "ygo:last_update",
+      "@type": "xsd:string"
+    },
+    "level": {
+      "@id": "ygo:level",
+      "@type": "xsd:integer"
+    },
+    "linkmarkers": {
+      "@id": "ygo:linkmarkers",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "linkval": {
+      "@id": "ygo:linkval",
+      "@type": "xsd:integer"
+    },
+    "mdRarity": {
+      "@id": "ygo:md_rarity",
+      "@type": "xsd:string"
+    },
+    "meta": {
+      "@id": "ygo:meta",
+      "@type": "@id"
+    },
+    "miscInfo": {
+      "@id": "ygo:misc_info",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "nextPage": {
+      "@id": "ygo:next_page",
+      "@type": "@id"
+    },
+    "nextPageOffset": {
+      "@id": "ygo:next_page_offset",
+      "@type": "xsd:integer"
+    },
+    "numOfCards": {
+      "@id": "ygo:num_of_cards",
+      "@type": "xsd:integer"
+    },
+    "ocgDate": {
+      "@id": "ygo:ocg_date",
+      "@type": "xsd:date"
+    },
+    "pagesRemaining": {
+      "@id": "ygo:pages_remaining",
+      "@type": "xsd:integer"
+    },
+    "questionAtk": {
+      "@id": "ygo:question_atk",
+      "@type": "xsd:integer"
+    },
+    "questionDef": {
+      "@id": "ygo:question_def",
+      "@type": "xsd:integer"
+    },
+    "race": {
+      "@id": "ygo:race",
+      "@type": "xsd:string"
+    },
+    "rowsRemaining": {
+      "@id": "ygo:rows_remaining",
+      "@type": "xsd:integer"
+    },
+    "scale": {
+      "@id": "ygo:scale",
+      "@type": "xsd:integer"
+    },
+    "setCode": {
+      "@id": "ygo:set_code",
+      "@type": "xsd:string"
+    },
+    "setImage": {
+      "@id": "ygo:set_image",
+      "@type": "@id"
+    },
+    "setName": {
+      "@id": "ygo:set_name",
+      "@type": "xsd:string"
+    },
+    "setPrice": {
+      "@id": "ygo:set_price",
+      "@type": "xsd:string"
+    },
+    "setRarity": {
+      "@id": "ygo:set_rarity",
+      "@type": "xsd:string"
+    },
+    "setRarityCode": {
+      "@id": "ygo:set_rarity_code",
+      "@type": "xsd:string"
+    },
+    "sortGroup": {
+      "@id": "ygo:sortGroup",
+      "@type": "xsd:integer"
+    },
+    "staple": {
+      "@id": "ygo:staple",
+      "@type": "xsd:string"
+    },
+    "tcgDate": {
+      "@id": "ygo:tcg_date",
+      "@type": "xsd:date"
+    },
+    "tcgplayerPrice": {
+      "@id": "ygo:tcgplayer_price",
+      "@type": "xsd:string"
+    },
+    "totalPages": {
+      "@id": "ygo:total_pages",
+      "@type": "xsd:integer"
+    },
+    "totalRows": {
+      "@id": "ygo:total_rows",
+      "@type": "xsd:integer"
+    },
+    "treatedAs": {
+      "@id": "ygo:treated_as",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "ygo:type",
+      "@type": "xsd:string"
+    },
+    "typeline": {
+      "@id": "ygo:typeline",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "types": {
+      "@id": "ygo:types",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "upvotes": {
+      "@id": "ygo:upvotes",
+      "@type": "xsd:integer"
+    },
+    "views": {
+      "@id": "ygo:views",
+      "@type": "xsd:integer"
+    },
+    "viewsweek": {
+      "@id": "ygo:viewsweek",
+      "@type": "xsd:integer"
+    },
+    "ygoprodeckUrl": {
+      "@id": "ygo:ygoprodeck_url",
+      "@type": "@id"
+    }
+  }
+}

@@ -1,0 +1,413 @@
+# Spectral ruleset for the YGOPRODeck Yu-Gi-Oh! Card Database API.
+#
+# Derived from the YGOPRODeck v7 API conventions:
+#   - Single host: db.ygoprodeck.com/api/v7
+#   - All endpoints are `.php` GET requests (PHP-style flat paths, no REST nouns)
+#   - Query parameters use snake_case (e.g. `set_code`, `has_effect`, `tcgplayer_data`)
+#   - Schema properties use snake_case (e.g. `card_sets`, `set_rarity_code`, `tcg_date`)
+#   - operationIds use camelCase verb-noun (`searchCards`, `getRandomCard`, `listCardSets`)
+#   - Tags use Title Case (e.g. `Cards`, `Card Sets`, `Reference Data`)
+#   - Summaries are prefixed with `YGOPRODeck` and Title-Cased
+
+extends: [[spectral:oas, recommended]]
+
+rules:
+
+  # ── INFO / METADATA ──────────────────────────────────────────────────────
+  info-title-ygoprodeck-prefix:
+    description: API title must start with "YGOPRODeck".
+    message: '{{property}} should start with "YGOPRODeck"'
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^YGOPRODeck'
+
+  info-description-required:
+    description: API description is required and should explain scope and rate limits.
+    message: '{{property}} must be present and at least 80 characters long.'
+    severity: error
+    given: $.info
+    then:
+      - field: description
+        function: truthy
+      - field: description
+        function: length
+        functionOptions:
+          min: 80
+
+  info-version-required:
+    description: API version must be specified (YGOPRODeck convention is `v7`).
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: A contact block must be present so consumers can reach the API provider.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-license-required:
+    description: License block must be present.
+    severity: warn
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  info-terms-of-service-required:
+    description: A terms-of-service URL is required (the API Guide link).
+    severity: warn
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+
+  # ── OPENAPI VERSION ─────────────────────────────────────────────────────
+  openapi-version-3-0:
+    description: OpenAPI document must use 3.0.x.
+    message: '{{property}} must match 3.0.x.'
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.0\.\d+$'
+
+  # ── SERVERS ─────────────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: Servers must use HTTPS.
+    message: '{{property}} must use HTTPS.'
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  servers-ygoprodeck-host:
+    description: Production server must be db.ygoprodeck.com.
+    message: '{{property}} must point at db.ygoprodeck.com/api/v7.'
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://db\.ygoprodeck\.com/api/v7'
+
+  servers-description-required:
+    description: Each server must have a description.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PATHS — NAMING CONVENTIONS ──────────────────────────────────────────
+  # YGOPRODeck uses flat PHP-style paths. We enforce the actual convention.
+  paths-lowercase:
+    description: Path segments must be lowercase.
+    message: '{{property}} must use lowercase path segments.'
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/[a-z0-9./{}_-]+$'
+
+  paths-php-suffix:
+    description: YGOPRODeck v7 endpoints end with `.php`.
+    message: '{{property}} should end with `.php` to match the YGOPRODeck v7 convention.'
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '\.php$'
+
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '.+/$'
+
+  paths-no-query-string:
+    description: Path keys must not include a query string — query params belong in `parameters`.
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '\?'
+
+  # ── OPERATIONS ──────────────────────────────────────────────────────────
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-id-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-id-camel-case:
+    description: operationId must be camelCase.
+    message: '{{value}} must be camelCase (lowercase first letter, no separators).'
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  operation-id-verb-prefix:
+    description: operationId should start with a CRUD-style verb (get, list, search, create, update, delete).
+    message: '{{value}} should start with `get`, `list`, `search`, `create`, `update`, or `delete`.'
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(get|list|search|create|update|delete|check)'
+
+  operation-summary-ygoprodeck-prefix:
+    description: Operation summaries should start with `YGOPRODeck`.
+    message: '{{value}} should start with `YGOPRODeck`.'
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^YGOPRODeck'
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # ── TAGS ────────────────────────────────────────────────────────────────
+  global-tags-defined:
+    description: A global `tags` array must be declared at the root of the spec.
+    severity: error
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tags-have-description:
+    description: Each global tag must include a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  tags-title-case:
+    description: Tag names should be Title Case (e.g. `Cards`, `Card Sets`, `Reference Data`).
+    message: '{{value}} must be Title Case.'
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([A-Z][a-z0-9]*)(\s+[A-Z][a-z0-9]*)*$'
+
+  # ── PARAMETERS ──────────────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-required:
+    description: Every parameter must declare a schema with a type.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: schema
+      function: truthy
+
+  parameter-snake-case:
+    description: Query parameter names must be snake_case (matches YGOPRODeck native style).
+    message: '{{value}} must be snake_case.'
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  parameter-example-encouraged:
+    description: Parameters should include an `example` value to help client developers.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: example
+      function: truthy
+
+  # ── RESPONSES ───────────────────────────────────────────────────────────
+  response-200-required:
+    description: Every operation must define a `200` response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '200'
+      function: truthy
+
+  response-description-required:
+    description: Every response must include a description.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-application-json:
+    description: Success responses must use `application/json`.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses.200.content
+    then:
+      field: application/json
+      function: truthy
+
+  response-400-for-filterable-operations:
+    description: Operations that accept user-supplied filter parameters should declare a `400` response.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete][?(@.parameters)]
+    then:
+      field: responses.400
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ───────────────────────────────────────────
+  schema-property-snake-case:
+    description: Schema property names must be snake_case (matches YGOPRODeck native field naming).
+    message: '{{property}} must be snake_case.'
+    severity: warn
+    given: '$.components.schemas[*].properties[*]~'
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  schema-description-required:
+    description: Every top-level schema in `components.schemas` should have a description.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Every top-level schema must declare a `type`.
+    severity: error
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  # ── SECURITY ────────────────────────────────────────────────────────────
+  # YGOPRODeck is unauthenticated — we positively enforce the absence of auth
+  # to keep accidental "leaks" out of the spec.
+  no-security-schemes:
+    description: YGOPRODeck v7 is unauthenticated; no security schemes should be declared.
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      function: falsy
+
+  no-global-security:
+    description: YGOPRODeck v7 has no global security; the `security` array should be empty or absent.
+    severity: warn
+    given: $.security
+    then:
+      function: falsy
+
+  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────────────
+  get-only:
+    description: YGOPRODeck v7 exposes GET-only endpoints. Other HTTP methods should not appear.
+    message: 'Only GET operations are valid on YGOPRODeck v7.'
+    severity: error
+    given: $.paths[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          not:
+            anyOf:
+              - required: [post]
+              - required: [put]
+              - required: [patch]
+              - required: [delete]
+
+  # ── GENERAL QUALITY ─────────────────────────────────────────────────────
+  external-docs-encouraged:
+    description: Provide `externalDocs` pointing at the YGOPRODeck API Guide.
+    severity: info
+    given: $
+    then:
+      field: externalDocs
+      function: truthy
+
+  external-docs-points-at-api-guide:
+    description: externalDocs.url should point at the YGOPRODeck API Guide.
+    severity: info
+    given: $.externalDocs.url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'ygoprodeck\.com/api-guide'
+
+  rate-limit-noted-in-description:
+    description: The API description should mention the documented rate limit.
+    severity: info
+    given: $.info.description
+    then:
+      function: pattern
+      functionOptions:
+        match: '20 requests per second|rate limit'
+
+  microcks-operation-extension:
+    description: Each operation should declare an `x-microcks-operation` block so the spec is mock-server ready.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy

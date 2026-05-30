@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-schema/ygoprodeck-api-card-set-print-schema.json",
+  "title": "CardSetPrint",
+  "description": "Per-print details for a specific set code (single card printing).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Card id (passcode).",
+      "example": 89631146
+    },
+    "name": {
+      "type": "string",
+      "description": "Card name.",
+      "example": "Blue-Eyes White Dragon"
+    },
+    "set_name": {
+      "type": "string",
+      "description": "Set name.",
+      "example": "Legend of Blue Eyes White Dragon"
+    },
+    "set_code": {
+      "type": "string",
+      "description": "Full set code identifying this printing.",
+      "example": "LOB-EN001"
+    },
+    "set_rarity": {
+      "type": "string",
+      "description": "Rarity of this printing.",
+      "example": "Ultra Rare"
+    },
+    "set_price": {
+      "type": "string",
+      "description": "Price of this printing (USD, stringified decimal).",
+      "example": "253.34"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "set_name",
+    "set_code",
+    "set_rarity"
+  ]
+}

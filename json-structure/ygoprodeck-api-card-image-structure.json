@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yu-gi-oh/refs/heads/main/json-structure/ygoprodeck-api-card-image-structure.json",
+  "name": "CardImage",
+  "description": "Image URLs for a single artwork variant of a card.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Image id (matches the card id for the default artwork; differs for alternate artworks).",
+      "example": 46986414
+    },
+    "image_url": {
+      "type": "uri",
+      "description": "Full-size card image URL. Do not hotlink \u2014 download and self-host.",
+      "example": "https://images.ygoprodeck.com/images/cards/46986414.jpg"
+    },
+    "image_url_small": {
+      "type": "uri",
+      "description": "Small / thumbnail image URL.",
+      "example": "https://images.ygoprodeck.com/images/cards_small/46986414.jpg"
+    },
+    "image_url_cropped": {
+      "type": "uri",
+      "description": "Cropped artwork-only image URL (no frame).",
+      "example": "https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg"
+    }
+  },
+  "required": [
+    "id",
+    "image_url",
+    "image_url_small",
+    "image_url_cropped"
+  ]
+}
