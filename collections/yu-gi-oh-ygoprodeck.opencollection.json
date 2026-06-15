@@ -1,0 +1,305 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database API",
+    "version": "v7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck Search Cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardinfo.php",
+            "params": [
+              {
+                "name": "name",
+                "value": "Dark Magician",
+                "type": "query",
+                "description": "Exact card name. Use a pipe (`|`) to query multiple names in one call (e.g. `Baby Dragon|Time Wizard`)."
+              },
+              {
+                "name": "fname",
+                "value": "Magician",
+                "type": "query",
+                "description": "Fuzzy / partial card name search."
+              },
+              {
+                "name": "id",
+                "value": "46986414",
+                "type": "query",
+                "description": "Card passcode (8-digit numeric id). Comma-separated for multiple ids."
+              },
+              {
+                "name": "konami_id",
+                "value": "4007",
+                "type": "query",
+                "description": "Konami official card id (different from the printed passcode)."
+              },
+              {
+                "name": "type",
+                "value": "Spellcaster",
+                "type": "query",
+                "description": "Card type (e.g. `Effect Monster`, `Synchro Monster`, `Spell Card`, `Trap Card`, `Link Monster`)."
+              },
+              {
+                "name": "race",
+                "value": "Spellcaster",
+                "type": "query",
+                "description": "Monster race (for monsters) or sub-type (for Spell/Trap, e.g. `Continuous`, `Quick-Play`, `Counter`)."
+              },
+              {
+                "name": "attribute",
+                "value": "DARK",
+                "type": "query",
+                "description": "Monster attribute."
+              },
+              {
+                "name": "level",
+                "value": "7",
+                "type": "query",
+                "description": "Monster level or rank. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte4`)."
+              },
+              {
+                "name": "link",
+                "value": "4",
+                "type": "query",
+                "description": "Link rating for Link Monsters."
+              },
+              {
+                "name": "linkmarker",
+                "value": "Top,Bottom",
+                "type": "query",
+                "description": "Link marker positions (one or more, comma-separated). Values are `Top`, `Bottom`, `Left`, `Right`, `Top-Left`, `Top-Right`, `Bottom-Left`, `Bottom-Right`."
+              },
+              {
+                "name": "atk",
+                "value": "gte2500",
+                "type": "query",
+                "description": "ATK value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte2500`)."
+              },
+              {
+                "name": "def",
+                "value": "lt2000",
+                "type": "query",
+                "description": "DEF value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte`."
+              },
+              {
+                "name": "scale",
+                "value": "4",
+                "type": "query",
+                "description": "Pendulum scale value."
+              },
+              {
+                "name": "archetype",
+                "value": "Blue-Eyes",
+                "type": "query",
+                "description": "Archetype name (see `/archetypes.php` for the complete list)."
+              },
+              {
+                "name": "cardset",
+                "value": "Metal Raiders",
+                "type": "query",
+                "description": "Card set name (see `/cardsets.php` for the complete list)."
+              },
+              {
+                "name": "banlist",
+                "value": "TCG",
+                "type": "query",
+                "description": "Banlist type to filter against."
+              },
+              {
+                "name": "format",
+                "value": "master duel",
+                "type": "query",
+                "description": "Tournament format legality filter."
+              },
+              {
+                "name": "staple",
+                "value": "yes",
+                "type": "query",
+                "description": "Pass `yes` to filter to staple cards only."
+              },
+              {
+                "name": "has_effect",
+                "value": "true",
+                "type": "query",
+                "description": "Pass `true` or `false` to filter cards by whether they have an actual effect."
+              },
+              {
+                "name": "sort",
+                "value": "atk",
+                "type": "query",
+                "description": "Sort order for the result set."
+              },
+              {
+                "name": "misc",
+                "value": "yes",
+                "type": "query",
+                "description": "Pass `yes` to include extended metadata (views, upvotes, formats, treated_as, release dates, konami_id, md_rarity, has_effect, genesys_points)."
+              },
+              {
+                "name": "tcgplayer_data",
+                "value": "yes",
+                "type": "query",
+                "description": "Pass `yes` to use TCGplayer card set data instead of the default."
+              },
+              {
+                "name": "language",
+                "value": "fr",
+                "type": "query",
+                "description": "Language code for card text. Default is English (omit). Supported alternatives are `fr`, `de`, `it`, `pt`."
+              },
+              {
+                "name": "startdate",
+                "value": "2024-01-01",
+                "type": "query",
+                "description": "Start date (`YYYY-MM-DD`) for release-date filtering."
+              },
+              {
+                "name": "enddate",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "End date (`YYYY-MM-DD`) for release-date filtering."
+              },
+              {
+                "name": "dateregion",
+                "value": "tcg_date",
+                "type": "query",
+                "description": "Region whose release dates the `startdate`/`enddate` window applies to (e.g. `tcg_date`, `ocg_date`)."
+              },
+              {
+                "name": "num",
+                "value": "20",
+                "type": "query",
+                "description": "Page size (results per page). Pair with `offset` for pagination."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Pagination offset (0-based)."
+              }
+            ]
+          },
+          "docs": "Search and filter the complete Yu-Gi-Oh! card database. Without parameters, returns all\ncards (large payload — clients should always pass filters). Filter by name, fuzzy name,\npasscode id, type, race, attribute, level, link rating, link markers, ATK/DEF (with\ncomparison operators `lt`, `lte`, `gt`, `gte`), pendulum scale, archetype, banlist, format,\nand more. Supports sorting, pagination (`num` + `offset`), language switching, and an\nextended metadata mode via `misc=yes`.\n"
+        },
+        {
+          "info": {
+            "name": "YGOPRODeck Get Random Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/randomcard.php"
+          },
+          "docs": "Return a single random Yu-Gi-Oh! card. The endpoint accepts no parameters and its\nresponse is intentionally uncached so each call returns a different card.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Card Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck List Card Sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardsets.php"
+          },
+          "docs": "Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set\nname, set code, card count, TCG release date, and set image URL. Takes no parameters.\n"
+        },
+        {
+          "info": {
+            "name": "YGOPRODeck Get Card Set Print Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardsetsinfo.php",
+            "params": [
+              {
+                "name": "setcode",
+                "value": "LOB-EN001",
+                "type": "query",
+                "description": "Set code identifying a specific card printing (e.g. `LOB-EN001`)."
+              }
+            ]
+          },
+          "docs": "Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,\ncard name, set name, set code, rarity, and market price.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Archetypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck List Archetypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/archetypes.php"
+          },
+          "docs": "Return every recognised Yu-Gi-Oh! archetype name. Useful to populate archetype pickers\nand to validate the `archetype` parameter on `/cardinfo.php`.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck Get Valid Card Filter Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardvalues.php"
+          },
+          "docs": "Return the canonical valid value enumerations used by the search engine — every card\ntype, monster race, monster attribute, level, link marker, and the per-card-class\n(MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates\ncardinfo query parameters before submission.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Database",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck Get Database Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/checkDBVer.php"
+          },
+          "docs": "Return the current YGOPRODeck card database version and last-updated timestamp. Clients\nshould poll this endpoint and invalidate their local cache when the version changes.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

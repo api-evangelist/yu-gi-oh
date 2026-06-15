@@ -1,0 +1,1048 @@
+{
+  "item": [
+    {
+      "id": "2ec89b0b-6d61-4e70-88af-d69c8499d67d",
+      "name": "Cards",
+      "description": {
+        "content": "Card search, filtering, and metadata retrieval.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c7595e6-1655-48ca-8ab9-c429d8a3ec86",
+          "name": "YGOPRODeck Search Cards",
+          "request": {
+            "name": "YGOPRODeck Search Cards",
+            "description": {
+              "content": "Search and filter the complete Yu-Gi-Oh! card database. Without parameters, returns all\ncards (large payload — clients should always pass filters). Filter by name, fuzzy name,\npasscode id, type, race, attribute, level, link rating, link markers, ATK/DEF (with\ncomparison operators `lt`, `lte`, `gt`, `gte`), pendulum scale, archetype, banlist, format,\nand more. Supports sorting, pagination (`num` + `offset`), language switching, and an\nextended metadata mode via `misc=yes`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardinfo.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Exact card name. Use a pipe (`|`) to query multiple names in one call (e.g. `Baby Dragon|Time Wizard`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fname",
+                  "value": "<string>",
+                  "description": "Fuzzy / partial card name search."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Card passcode (8-digit numeric id). Comma-separated for multiple ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "konami_id",
+                  "value": "<string>",
+                  "description": "Konami official card id (different from the printed passcode)."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Card type (e.g. `Effect Monster`, `Synchro Monster`, `Spell Card`, `Trap Card`, `Link Monster`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "race",
+                  "value": "<string>",
+                  "description": "Monster race (for monsters) or sub-type (for Spell/Trap, e.g. `Continuous`, `Quick-Play`, `Counter`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribute",
+                  "value": "<string>",
+                  "description": "Monster attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "level",
+                  "value": "<string>",
+                  "description": "Monster level or rank. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte4`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "link",
+                  "value": "<integer>",
+                  "description": "Link rating for Link Monsters."
+                },
+                {
+                  "disabled": false,
+                  "key": "linkmarker",
+                  "value": "<string>",
+                  "description": "Link marker positions (one or more, comma-separated). Values are `Top`, `Bottom`, `Left`, `Right`, `Top-Left`, `Top-Right`, `Bottom-Left`, `Bottom-Right`."
+                },
+                {
+                  "disabled": false,
+                  "key": "atk",
+                  "value": "<string>",
+                  "description": "ATK value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte` (e.g. `gte2500`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "def",
+                  "value": "<string>",
+                  "description": "DEF value filter. Supports comparison operators `lt`, `lte`, `gt`, `gte`."
+                },
+                {
+                  "disabled": false,
+                  "key": "scale",
+                  "value": "<integer>",
+                  "description": "Pendulum scale value."
+                },
+                {
+                  "disabled": false,
+                  "key": "archetype",
+                  "value": "<string>",
+                  "description": "Archetype name (see `/archetypes.php` for the complete list)."
+                },
+                {
+                  "disabled": false,
+                  "key": "cardset",
+                  "value": "<string>",
+                  "description": "Card set name (see `/cardsets.php` for the complete list)."
+                },
+                {
+                  "disabled": false,
+                  "key": "banlist",
+                  "value": "<string>",
+                  "description": "Banlist type to filter against."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Tournament format legality filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "staple",
+                  "value": "<string>",
+                  "description": "Pass `yes` to filter to staple cards only."
+                },
+                {
+                  "disabled": false,
+                  "key": "has_effect",
+                  "value": "<boolean>",
+                  "description": "Pass `true` or `false` to filter cards by whether they have an actual effect."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order for the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "misc",
+                  "value": "<string>",
+                  "description": "Pass `yes` to include extended metadata (views, upvotes, formats, treated_as, release dates, konami_id, md_rarity, has_effect, genesys_points)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tcgplayer_data",
+                  "value": "<string>",
+                  "description": "Pass `yes` to use TCGplayer card set data instead of the default."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Language code for card text. Default is English (omit). Supported alternatives are `fr`, `de`, `it`, `pt`."
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<date>",
+                  "description": "Start date (`YYYY-MM-DD`) for release-date filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<date>",
+                  "description": "End date (`YYYY-MM-DD`) for release-date filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateregion",
+                  "value": "<string>",
+                  "description": "Region whose release dates the `startdate`/`enddate` window applies to (e.g. `tcg_date`, `ocg_date`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "num",
+                  "value": "<integer>",
+                  "description": "Page size (results per page). Pair with `offset` for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset (0-based)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "180e8f69-d189-4998-ab4f-7c1ded91eac8",
+              "name": "A page of matching cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Dark Magician"
+                    },
+                    {
+                      "key": "fname",
+                      "value": "Magician"
+                    },
+                    {
+                      "key": "id",
+                      "value": "46986414"
+                    },
+                    {
+                      "key": "konami_id",
+                      "value": "4007"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "race",
+                      "value": "Spellcaster"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "DARK"
+                    },
+                    {
+                      "key": "level",
+                      "value": "7"
+                    },
+                    {
+                      "key": "link",
+                      "value": "4"
+                    },
+                    {
+                      "key": "linkmarker",
+                      "value": "Top,Bottom"
+                    },
+                    {
+                      "key": "atk",
+                      "value": "gte2500"
+                    },
+                    {
+                      "key": "def",
+                      "value": "lt2000"
+                    },
+                    {
+                      "key": "scale",
+                      "value": "4"
+                    },
+                    {
+                      "key": "archetype",
+                      "value": "Blue-Eyes"
+                    },
+                    {
+                      "key": "cardset",
+                      "value": "Metal Raiders"
+                    },
+                    {
+                      "key": "banlist",
+                      "value": "TCG"
+                    },
+                    {
+                      "key": "format",
+                      "value": "master duel"
+                    },
+                    {
+                      "key": "staple",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "has_effect",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "atk"
+                    },
+                    {
+                      "key": "misc",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "tcgplayer_data",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "language",
+                      "value": "fr"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "2024-12-31"
+                    },
+                    {
+                      "key": "dateregion",
+                      "value": "tcg_date"
+                    },
+                    {
+                      "key": "num",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 46986414,\n      \"name\": \"Dark Magician\",\n      \"typeline\": [\n        \"Spellcaster\",\n        \"Normal\"\n      ],\n      \"type\": \"Normal Monster\",\n      \"humanReadableCardType\": \"Normal Monster\",\n      \"frameType\": \"normal\",\n      \"desc\": \"The ultimate wizard in terms of attack and defense.\",\n      \"race\": \"Spellcaster\",\n      \"atk\": 2500,\n      \"def\": 2100,\n      \"level\": 7,\n      \"attribute\": \"DARK\",\n      \"archetype\": \"Dark Magician\",\n      \"ygoprodeck_url\": \"https://ygoprodeck.com/card/dark-magician-4087\",\n      \"card_sets\": [\n        {\n          \"set_name\": \"Legend of Blue Eyes White Dragon\",\n          \"set_code\": \"LOB-EN005\",\n          \"set_rarity\": \"Ultra Rare\",\n          \"set_rarity_code\": \"(UR)\",\n          \"set_price\": \"12.99\"\n        }\n      ],\n      \"card_images\": [\n        {\n          \"id\": 46986414,\n          \"image_url\": \"https://images.ygoprodeck.com/images/cards/46986414.jpg\",\n          \"image_url_small\": \"https://images.ygoprodeck.com/images/cards_small/46986414.jpg\",\n          \"image_url_cropped\": \"https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg\"\n        }\n      ],\n      \"card_prices\": [\n        {\n          \"cardmarket_price\": \"0.02\",\n          \"tcgplayer_price\": \"0.24\",\n          \"ebay_price\": \"0.99\",\n          \"amazon_price\": \"14.45\",\n          \"coolstuffinc_price\": \"0.39\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"current_rows\": 1,\n    \"total_rows\": 1,\n    \"rows_remaining\": 0,\n    \"total_pages\": 1,\n    \"pages_remaining\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d8710f-9d00-4adc-b6cb-d4e515ac9a92",
+              "name": "Invalid request — an unknown parameter value was supplied. The error message typically suggests valid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Dark Magician"
+                    },
+                    {
+                      "key": "fname",
+                      "value": "Magician"
+                    },
+                    {
+                      "key": "id",
+                      "value": "46986414"
+                    },
+                    {
+                      "key": "konami_id",
+                      "value": "4007"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "race",
+                      "value": "Spellcaster"
+                    },
+                    {
+                      "key": "attribute",
+                      "value": "DARK"
+                    },
+                    {
+                      "key": "level",
+                      "value": "7"
+                    },
+                    {
+                      "key": "link",
+                      "value": "4"
+                    },
+                    {
+                      "key": "linkmarker",
+                      "value": "Top,Bottom"
+                    },
+                    {
+                      "key": "atk",
+                      "value": "gte2500"
+                    },
+                    {
+                      "key": "def",
+                      "value": "lt2000"
+                    },
+                    {
+                      "key": "scale",
+                      "value": "4"
+                    },
+                    {
+                      "key": "archetype",
+                      "value": "Blue-Eyes"
+                    },
+                    {
+                      "key": "cardset",
+                      "value": "Metal Raiders"
+                    },
+                    {
+                      "key": "banlist",
+                      "value": "TCG"
+                    },
+                    {
+                      "key": "format",
+                      "value": "master duel"
+                    },
+                    {
+                      "key": "staple",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "has_effect",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "atk"
+                    },
+                    {
+                      "key": "misc",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "tcgplayer_data",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "language",
+                      "value": "fr"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "2024-12-31"
+                    },
+                    {
+                      "key": "dateregion",
+                      "value": "tcg_date"
+                    },
+                    {
+                      "key": "num",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"No card matching your query was found in the database. Please ensure your search query is correct.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29578840-7053-4a8b-905f-1e02cc544ab5",
+          "name": "YGOPRODeck Get Random Card",
+          "request": {
+            "name": "YGOPRODeck Get Random Card",
+            "description": {
+              "content": "Return a single random Yu-Gi-Oh! card. The endpoint accepts no parameters and its\nresponse is intentionally uncached so each call returns a different card.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "randomcard.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e139f3d-9b7b-48e1-9d37-edb8c53abc47",
+              "name": "A single random card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "randomcard.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 89631146,\n  \"name\": \"Blue-Eyes White Dragon\",\n  \"typeline\": [\n    \"Dragon\",\n    \"Normal\"\n  ],\n  \"type\": \"Normal Monster\",\n  \"humanReadableCardType\": \"Normal Monster\",\n  \"frameType\": \"normal\",\n  \"desc\": \"This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.\",\n  \"race\": \"Dragon\",\n  \"atk\": 3000,\n  \"def\": 2500,\n  \"level\": 8,\n  \"attribute\": \"LIGHT\",\n  \"archetype\": \"Blue-Eyes\",\n  \"ygoprodeck_url\": \"https://ygoprodeck.com/card/blue-eyes-white-dragon-4001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5f9f4d42-5bec-4f14-81a8-cc2c681e47c2",
+      "name": "Card Sets",
+      "description": {
+        "content": "Yu-Gi-Oh! card set catalog and per-print details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b19373c0-aec9-4c34-b978-786a561729d1",
+          "name": "YGOPRODeck List Card Sets",
+          "request": {
+            "name": "YGOPRODeck List Card Sets",
+            "description": {
+              "content": "Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set\nname, set code, card count, TCG release date, and set image URL. Takes no parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardsets.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "273a0cd8-9fe6-4e52-a042-6e1629e332d2",
+              "name": "The complete card set catalog.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsets.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"set_name\": \"Legend of Blue Eyes White Dragon\",\n    \"set_code\": \"LOB\",\n    \"num_of_cards\": 126,\n    \"tcg_date\": \"2002-03-08\",\n    \"set_image\": \"https://images.ygoprodeck.com/images/sets/LOB.jpg\"\n  },\n  {\n    \"set_name\": \"Metal Raiders\",\n    \"set_code\": \"MRD\",\n    \"num_of_cards\": 144,\n    \"tcg_date\": \"2002-06-26\",\n    \"set_image\": \"https://images.ygoprodeck.com/images/sets/MRD.jpg\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "932bc4b4-867a-41e8-b44c-6b426fda048d",
+          "name": "YGOPRODeck Get Card Set Print Info",
+          "request": {
+            "name": "YGOPRODeck Get Card Set Print Info",
+            "description": {
+              "content": "Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,\ncard name, set name, set code, rarity, and market price.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardsetsinfo.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "setcode",
+                  "value": "<string>",
+                  "description": "(Required) Set code identifying a specific card printing (e.g. `LOB-EN001`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21eda022-1f94-4e6d-87c2-0508080cb376",
+              "name": "Print details for the requested set code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsetsinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setcode",
+                      "value": "LOB-EN001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 89631146,\n  \"name\": \"Blue-Eyes White Dragon\",\n  \"set_name\": \"Legend of Blue Eyes White Dragon\",\n  \"set_code\": \"LOB-EN001\",\n  \"set_rarity\": \"Ultra Rare\",\n  \"set_price\": \"253.34\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d4bb85a-1189-4e8f-abf6-c16da7cbc04f",
+              "name": "No card matching the requested set code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsetsinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setcode",
+                      "value": "LOB-EN001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"No card matching your query was found in the database\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "62dfba49-59ac-475a-84ed-1c69abb2aef3",
+      "name": "Archetypes",
+      "description": {
+        "content": "Recognised Yu-Gi-Oh! archetype catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92bf3473-ed39-4b8a-b054-b92bb4cdfa0f",
+          "name": "YGOPRODeck List Archetypes",
+          "request": {
+            "name": "YGOPRODeck List Archetypes",
+            "description": {
+              "content": "Return every recognised Yu-Gi-Oh! archetype name. Useful to populate archetype pickers\nand to validate the `archetype` parameter on `/cardinfo.php`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "archetypes.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69d9399a-0206-4c94-b718-0234bc010cac",
+              "name": "The complete archetype catalog.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "archetypes.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"archetype_name\": \"Blue-Eyes\"\n  },\n  {\n    \"archetype_name\": \"Dark Magician\"\n  },\n  {\n    \"archetype_name\": \"Red-Eyes\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e4ca04f3-06fb-4af3-b7d6-946f0ac6ab78",
+      "name": "Reference Data",
+      "description": {
+        "content": "Valid value enumerations used by the search engine.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0adb5dd6-21c0-4ae9-9c50-f8747f2fbbf1",
+          "name": "YGOPRODeck Get Valid Card Filter Values",
+          "request": {
+            "name": "YGOPRODeck Get Valid Card Filter Values",
+            "description": {
+              "content": "Return the canonical valid value enumerations used by the search engine — every card\ntype, monster race, monster attribute, level, link marker, and the per-card-class\n(MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates\ncardinfo query parameters before submission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardvalues.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "428ab074-d223-4684-9355-0772c14a4eb0",
+              "name": "Valid value enumerations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardvalues.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"types\": [\n    {\n      \"name\": \"Effect Monster\",\n      \"group\": \"MONSTER\",\n      \"sortGroup\": 2,\n      \"area\": [\n        \"MAIN\",\n        \"SIDE\"\n      ]\n    },\n    {\n      \"name\": \"Link Monster\",\n      \"group\": \"MONSTER\",\n      \"sortGroup\": 7,\n      \"area\": [\n        \"EXTRA\",\n        \"SIDE\"\n      ]\n    },\n    {\n      \"name\": \"Spell Card\",\n      \"group\": \"SPELL\",\n      \"sortGroup\": 8,\n      \"area\": [\n        \"MAIN\",\n        \"SIDE\"\n      ]\n    }\n  ],\n  \"MONSTER\": {\n    \"type\": [\n      \"Effect Monster\",\n      \"Normal Monster\",\n      \"Link Monster\",\n      \"XYZ Monster\",\n      \"Synchro Monster\",\n      \"Fusion Monster\"\n    ],\n    \"race\": [\n      \"Dragon\",\n      \"Spellcaster\",\n      \"Warrior\",\n      \"Beast\"\n    ],\n    \"attributes\": [\n      \"DARK\",\n      \"LIGHT\",\n      \"WATER\",\n      \"FIRE\",\n      \"WIND\",\n      \"EARTH\",\n      \"DIVINE\"\n    ],\n    \"level\": [\n      1,\n      2,\n      3,\n      4,\n      5,\n      6,\n      7,\n      8,\n      9,\n      10,\n      11,\n      12\n    ],\n    \"linkmarkers\": [\n      \"Top\",\n      \"Bottom\",\n      \"Left\",\n      \"Right\",\n      \"Top-Left\",\n      \"Top-Right\",\n      \"Bottom-Left\",\n      \"Bottom-Right\"\n    ]\n  },\n  \"SPELL\": {\n    \"type\": [\n      \"Spell Card\"\n    ],\n    \"race\": [\n      \"Continuous\",\n      \"Equip\",\n      \"Field\",\n      \"Normal\",\n      \"Quick-Play\",\n      \"Ritual\"\n    ]\n  },\n  \"TRAP\": {\n    \"type\": [\n      \"Trap Card\"\n    ],\n    \"race\": [\n      \"Continuous\",\n      \"Counter\",\n      \"Normal\"\n    ]\n  },\n  \"SKILL\": {\n    \"type\": [\n      \"Skill Card\"\n    ],\n    \"race\": [\n      \"Jaden Yuki\",\n      \"Seto Kaiba\",\n      \"Yami Yugi\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "32553728-231f-43b4-bc5a-08962d7531e7",
+      "name": "Database",
+      "description": {
+        "content": "Database version and freshness information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0e591e7-e630-4f21-ae96-2dd69fee2c90",
+          "name": "YGOPRODeck Get Database Version",
+          "request": {
+            "name": "YGOPRODeck Get Database Version",
+            "description": {
+              "content": "Return the current YGOPRODeck card database version and last-updated timestamp. Clients\nshould poll this endpoint and invalidate their local cache when the version changes.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkDBVer.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4379742-0c0c-4c52-88b6-83ba7b7df2a2",
+              "name": "Current database version and last-update timestamp.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkDBVer.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"database_version\": \"145.46\",\n    \"last_update\": \"2026-05-22 16:00:23\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://db.ygoprodeck.com/api/v7",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7fd891d5-1d02-43bb-af07-cebd67daaa1c",
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game\ncorpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid\nvalue enumerations used by the search engine (types, races, attributes, link markers),\nthe underlying database version, and a random-card endpoint. No authentication is required;\nthe documented rate limit is 20 requests per second per IP (one-hour ban on violation).\n\nAll card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec\nis a third-party API description, generated from the YGOPRODeck API Guide\n(https://ygoprodeck.com/api-guide/) and live response inspection.\n\n\nContact Support:\n Name: YGOPRODeck",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,18 +1,17 @@
 aid: yu-gi-oh
 name: YGOPRODeck
 description: >-
-  YGOPRODeck is a community-run Yu-Gi-Oh! TCG database and deck-sharing platform that exposes
-  a free, public REST API (v7) for querying every Yu-Gi-Oh! card, archetype, card set, banlist
-  status, format legality, market price, and card image. The API is the canonical open data
-  source used by community deck builders, mobile apps, Discord bots, simulators, and analytics
-  tools across the Yu-Gi-Oh! ecosystem.
+  YGOPRODeck is a community-run Yu-Gi-Oh! TCG database and deck-sharing platform that exposes a free, public REST API
+  (v7) for querying every Yu-Gi-Oh! card, archetype, card set, banlist status, format legality, market price, and card
+  image. The API is the canonical open data source used by community deck builders, mobile apps, Discord bots,
+  simulators, and analytics tools across the Yu-Gi-Oh! ecosystem.
 url: https://ygoprodeck.com/api-guide/
 specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-type: opensource
 x-source: public-apis/public-apis
-x-category: "Games & Comics"
+x-category: Games & Comics
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
@@ -26,11 +25,10 @@ tags:
 apis:
   - name: YGOPRODeck Card Database API
     description: >-
-      The v7 REST API for the YGOPRODeck Yu-Gi-Oh! card database. Provides card search and
-      filtering across every printed Yu-Gi-Oh! card, full card metadata (type, race, attribute,
-      level, link, link markers, ATK/DEF, archetype, banlist, format legality), card sets and
-      release info, archetypes, valid value enumerations, database version, and a random card
-      endpoint. Free, no API key required, 20 requests per second per IP.
+      The v7 REST API for the YGOPRODeck Yu-Gi-Oh! card database. Provides card search and filtering across every
+      printed Yu-Gi-Oh! card, full card metadata (type, race, attribute, level, link, link markers, ATK/DEF, archetype,
+      banlist, format legality), card sets and release info, archetypes, valid value enumerations, database version, and
+      a random card endpoint. Free, no API key required, 20 requests per second per IP.
     humanURL: https://ygoprodeck.com/api-guide/
     baseURL: https://db.ygoprodeck.com/api/v7
     image: https://images.ygoprodeck.com/images/cards/89631146.jpg
@@ -51,16 +49,6 @@ apis:
         url: https://ygoprodeck.com/api-guide-supplemental/
       - type: OpenAPI
         url: openapi/yu-gi-oh-ygoprodeck-openapi.yml
-      - type: NaftikoCapability
-        url: capabilities/ygoprodeck-cards.yaml
-      - type: NaftikoCapability
-        url: capabilities/ygoprodeck-card-sets.yaml
-      - type: NaftikoCapability
-        url: capabilities/ygoprodeck-archetypes.yaml
-      - type: NaftikoCapability
-        url: capabilities/ygoprodeck-reference-data.yaml
-      - type: NaftikoCapability
-        url: capabilities/ygoprodeck-database.yaml
       - type: SignUp
         url: https://ygoprodeck.com/account/
       - type: SDK
@@ -73,7 +61,7 @@ apis:
         title: Python Client (ygoprodeck-api-client)
         url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
       - type: SDK
-        title: ".NET / C# SDK (YGOPRODeck-Api-Wrapper)"
+        title: .NET / C# SDK (YGOPRODeck-Api-Wrapper)
         url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
       - type: SDK
         title: .NET Wrapper (ygopro.NET)
@@ -133,76 +121,74 @@ common:
 features:
   - name: Card Search
     description: >-
-      Query the full Yu-Gi-Oh! card database with rich filters — exact name, fuzzy name, passcode
-      ID, type, race, attribute, level/rank, link rating, link markers, ATK/DEF (with lt/lte/gt/gte
-      comparison operators), pendulum scale, archetype, card set, format legality, banlist status,
-      and effect-presence flag.
+      Query the full Yu-Gi-Oh! card database with rich filters — exact name, fuzzy name, passcode ID, type, race,
+      attribute, level/rank, link rating, link markers, ATK/DEF (with lt/lte/gt/gte comparison operators), pendulum
+      scale, archetype, card set, format legality, banlist status, and effect-presence flag.
   - name: Multilingual Card Data
     description: >-
-      Retrieve card text in English (default), French, German, Italian, and Portuguese using the
-      `language` parameter on the cardinfo endpoint.
+      Retrieve card text in English (default), French, German, Italian, and Portuguese using the `language` parameter on
+      the cardinfo endpoint.
   - name: Format and Banlist Filtering
     description: >-
-      Filter the catalog by tournament format (TCG, OCG, Goat, OCG Goat, Speed Duel, Master Duel,
-      Rush Duel, Duel Links, GenesYS) and banlist status to power deck builders, legality checkers,
-      and tournament tools.
+      Filter the catalog by tournament format (TCG, OCG, Goat, OCG Goat, Speed Duel, Master Duel, Rush Duel, Duel Links,
+      GenesYS) and banlist status to power deck builders, legality checkers, and tournament tools.
   - name: Card Set and Print Run Catalog
     description: >-
-      Enumerate every Yu-Gi-Oh! card set (1,000+) with TCG release dates, card counts, set images,
-      and per-print pricing and rarity data via cardsets.php and cardsetsinfo.php.
+      Enumerate every Yu-Gi-Oh! card set (1,000+) with TCG release dates, card counts, set images, and per-print pricing
+      and rarity data via cardsets.php and cardsetsinfo.php.
   - name: Archetype Catalog
     description: >-
-      List every recognised Yu-Gi-Oh! archetype (600+) to power archetype-based filtering, deck
-      categorisation, and search-as-you-type experiences.
+      List every recognised Yu-Gi-Oh! archetype (600+) to power archetype-based filtering, deck categorisation, and
+      search-as-you-type experiences.
   - name: Market Price Aggregation
     description: >-
-      Each card response includes prices from Cardmarket, TCGplayer, eBay, Amazon, and CoolStuffInc
-      to power price tracking and arbitrage tools.
+      Each card response includes prices from Cardmarket, TCGplayer, eBay, Amazon, and CoolStuffInc to power price
+      tracking and arbitrage tools.
   - name: Card Image CDN
     description: >-
-      Full-resolution, small, and cropped card images are served from images.ygoprodeck.com. Direct
-      hotlinking is prohibited; consumers must download and self-host images.
+      Full-resolution, small, and cropped card images are served from images.ygoprodeck.com. Direct hotlinking is
+      prohibited; consumers must download and self-host images.
   - name: Database Version Tracking
     description: >-
-      The checkDBVer.php endpoint exposes the current database version and last update timestamp
-      so that cached clients can invalidate efficiently.
+      The checkDBVer.php endpoint exposes the current database version and last update timestamp so that cached clients
+      can invalidate efficiently.
   - name: Random Card Endpoint
     description: >-
-      The randomcard.php endpoint returns a single random card and is uncached, suitable for
-      "card of the day" widgets, Discord bots, and discovery features.
+      The randomcard.php endpoint returns a single random card and is uncached, suitable for "card of the day" widgets,
+      Discord bots, and discovery features.
   - name: Open and Free Access
     description: >-
-      No API key, no authentication, no quota beyond the documented 20 requests per second per IP.
-      Funded by YGOPRODeck Premium subscriptions, ads, and donations rather than API metering.
+      No API key, no authentication, no quota beyond the documented 20 requests per second per IP. Funded by YGOPRODeck
+      Premium subscriptions, ads, and donations rather than API metering.
 useCases:
   - name: Deck Builder
     description: >-
-      Web and mobile deck builders use cardinfo.php with archetype, format, and banlist filters
-      to surface only the cards a player can legally include in a given tournament format.
+      Web and mobile deck builders use cardinfo.php with archetype, format, and banlist filters to surface only the
+      cards a player can legally include in a given tournament format.
   - name: Yu-Gi-Oh! Discord Bots
     description: >-
-      Discord bots like the official YGOPRODeck bot use cardinfo.php and randomcard.php to look up
-      cards, post random cards, and resolve archetype questions inside chat servers.
+      Discord bots like the official YGOPRODeck bot use cardinfo.php and randomcard.php to look up cards, post random
+      cards, and resolve archetype questions inside chat servers.
   - name: Price Tracker
     description: >-
-      Apps that surface card prices use the per-card prices array to monitor Cardmarket/TCGplayer
-      values, build watchlists, and detect arbitrage opportunities across marketplaces.
+      Apps that surface card prices use the per-card prices array to monitor Cardmarket/TCGplayer values, build
+      watchlists, and detect arbitrage opportunities across marketplaces.
   - name: Tournament Legality Checker
     description: >-
-      Tournament platforms (Master Duel, Duel Links, TCG, OCG) use the banlist and format filters
-      to confirm deck legality before accepting a registration.
+      Tournament platforms (Master Duel, Duel Links, TCG, OCG) use the banlist and format filters to confirm deck
+      legality before accepting a registration.
   - name: Card Image Pipeline
     description: >-
-      Game simulators and printing tools download the full card image library once and rebuild
-      their local card art catalog on each database version bump.
+      Game simulators and printing tools download the full card image library once and rebuild their local card art
+      catalog on each database version bump.
   - name: Card Recognition Training Data
     description: >-
-      Computer vision pipelines for physical card recognition pull the entire image set as labelled
-      training data, keyed by card id.
+      Computer vision pipelines for physical card recognition pull the entire image set as labelled training data, keyed
+      by card id.
   - name: Meta and Format Analytics
     description: >-
-      Meta analytics sites pull archetype and format data to build win-rate dashboards, archetype
-      popularity charts, and ban-list impact studies.
+      Meta analytics sites pull archetype and format data to build win-rate dashboards, archetype popularity charts, and
+      ban-list impact studies.
 integrations:
   - name: Cardmarket
     description: Per-card pricing in cardinfo responses sources Cardmarket marketplace prices.
@@ -216,14 +202,13 @@ integrations:
     description: Per-card pricing in cardinfo responses sources CoolStuffInc marketplace prices.
   - name: Konami / 4K Media
     description: >-
-      All card text and imagery is copyright Konami Digital Entertainment / 4K Media; YGOPRODeck
-      surfaces and redistributes it under fair-use community-database conventions.
+      All card text and imagery is copyright Konami Digital Entertainment / 4K Media; YGOPRODeck surfaces and
+      redistributes it under fair-use community-database conventions.
 solutions:
   - name: Community Yu-Gi-Oh! Database
     description: >-
-      A fully open, community-maintained replacement for proprietary Yu-Gi-Oh! card databases that
-      lets developers build any tool — deck builder, simulator, scanner, bot — on top of the
-      complete TCG corpus without contractual gates.
+      A fully open, community-maintained replacement for proprietary Yu-Gi-Oh! card databases that lets developers build
+      any tool — deck builder, simulator, scanner, bot — on top of the complete TCG corpus without contractual gates.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
