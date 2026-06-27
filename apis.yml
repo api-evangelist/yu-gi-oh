@@ -49,24 +49,24 @@ apis:
         url: https://ygoprodeck.com/api-guide-supplemental/
       - type: OpenAPI
         url: openapi/yu-gi-oh-ygoprodeck-openapi.yml
-      - type: SignUp
+      - type: Signup
         url: https://ygoprodeck.com/account/
-      - type: SDK
+      - type: SDKs
         title: Python SDK (pygo_API)
         url: https://github.com/Yeet195/pygo_API
-      - type: SDK
+      - type: SDKs
         title: Python SDK (pydeck)
         url: https://github.com/kaangiray26/pydeck
-      - type: SDK
+      - type: SDKs
         title: Python Client (ygoprodeck-api-client)
         url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
-      - type: SDK
+      - type: SDKs
         title: .NET / C# SDK (YGOPRODeck-Api-Wrapper)
         url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
-      - type: SDK
+      - type: SDKs
         title: .NET Wrapper (ygopro.NET)
         url: https://github.com/MordechaiHadad/ygopro.NET
-      - type: SDK
+      - type: SDKs
         title: JavaScript / TypeScript Wrapper
         url: https://github.com/whdzera/ygoprodeck
       - type: CodeExamples
@@ -75,7 +75,7 @@ apis:
       - type: CodeExamples
         title: Image Downloader (Python)
         url: https://github.com/usersina/YGOCards_Downloader
-      - type: Webhook
+      - type: Webhooks
         title: Image Hotlinking Policy (do not hotlink)
         url: https://ygoprodeck.com/api-guide/
 common:
