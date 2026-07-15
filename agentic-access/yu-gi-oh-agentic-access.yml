@@ -1,0 +1,84 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/yu-gi-oh-ygoprodeck-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 7
+  by_action_class:
+    connected: 7
+  by_consequence:
+    read: 7
+  human_in_the_loop_required: 0
+operations:
+- path: /cardinfo.php
+  method: get
+  operationId: searchCards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /randomcard.php
+  method: get
+  operationId: getRandomCard
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cardsets.php
+  method: get
+  operationId: listCardSets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cardsetsinfo.php
+  method: get
+  operationId: getCardSetInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /archetypes.php
+  method: get
+  operationId: listArchetypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cardvalues.php
+  method: get
+  operationId: getCardValues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkDBVer.php
+  method: get
+  operationId: getDatabaseVersion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

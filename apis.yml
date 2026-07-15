@@ -79,6 +79,8 @@ apis:
         title: Image Hotlinking Policy (do not hotlink)
         url: https://ygoprodeck.com/api-guide/
 common:
+  - type: AgenticAccess
+    url: agentic-access/yu-gi-oh-agentic-access.yml
   - type: DomainSecurity
     url: security/yu-gi-oh-domain-security.yml
   - type: Website
