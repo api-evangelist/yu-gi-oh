@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes API
+  version: v7
+  description: 'YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game
+
+    corpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid
+
+    value enumerations used by the search engine (types, races, attributes, link markers),
+
+    the underlying database version, and a random-card endpoint. No authentication is required;
+
+    the documented rate limit is 20 requests per second per IP (one-hour ban on violation).
+
+
+    All card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec
+
+    is a third-party API description, generated from the YGOPRODeck API Guide
+
+    (https://ygoprodeck.com/api-guide/) and live response inspection.
+
+    '
+  termsOfService: https://ygoprodeck.com/api-guide/
+  contact:
+    name: YGOPRODeck
+    url: https://ygoprodeck.com/
+  license:
+    name: Community / Unspecified
+    url: https://ygoprodeck.com/about/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://db.ygoprodeck.com/api/v7
+  description: YGOPRODeck v7 production API
+tags:
+- name: Archetypes
+  description: Recognised Yu-Gi-Oh! archetype catalog.
+paths:
+  /archetypes.php:
+    get:
+      tags:
+      - Archetypes
+      operationId: listArchetypes
+      summary: YGOPRODeck List Archetypes
+      description: 'Return every recognised Yu-Gi-Oh! archetype name. Useful to populate archetype pickers
+
+        and to validate the `archetype` parameter on `/cardinfo.php`.
+
+        '
+      responses:
+        '200':
+          description: The complete archetype catalog.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Archetype'
+              examples:
+                ListArchetypes200Example:
+                  summary: Default listArchetypes 200 response
+                  x-microcks-default: true
+                  value:
+                  - archetype_name: Blue-Eyes
+                  - archetype_name: Dark Magician
+                  - archetype_name: Red-Eyes
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Archetype:
+      type: object
+      description: A recognised Yu-Gi-Oh! archetype.
+      properties:
+        archetype_name:
+          type: string
+          description: Archetype name.
+          example: Blue-Eyes
+      required:
+      - archetype_name
+externalDocs:
+  description: YGOPRODeck API Guide
+  url: https://ygoprodeck.com/api-guide/

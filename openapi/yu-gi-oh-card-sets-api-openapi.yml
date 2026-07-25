@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Card Sets API
+  version: v7
+  description: 'YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game
+
+    corpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid
+
+    value enumerations used by the search engine (types, races, attributes, link markers),
+
+    the underlying database version, and a random-card endpoint. No authentication is required;
+
+    the documented rate limit is 20 requests per second per IP (one-hour ban on violation).
+
+
+    All card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec
+
+    is a third-party API description, generated from the YGOPRODeck API Guide
+
+    (https://ygoprodeck.com/api-guide/) and live response inspection.
+
+    '
+  termsOfService: https://ygoprodeck.com/api-guide/
+  contact:
+    name: YGOPRODeck
+    url: https://ygoprodeck.com/
+  license:
+    name: Community / Unspecified
+    url: https://ygoprodeck.com/about/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://db.ygoprodeck.com/api/v7
+  description: YGOPRODeck v7 production API
+tags:
+- name: Card Sets
+  description: Yu-Gi-Oh! card set catalog and per-print details.
+paths:
+  /cardsets.php:
+    get:
+      tags:
+      - Card Sets
+      operationId: listCardSets
+      summary: YGOPRODeck List Card Sets
+      description: 'Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set
+
+        name, set code, card count, TCG release date, and set image URL. Takes no parameters.
+
+        '
+      responses:
+        '200':
+          description: The complete card set catalog.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardSet'
+              examples:
+                ListCardSets200Example:
+                  summary: Default listCardSets 200 response
+                  x-microcks-default: true
+                  value:
+                  - set_name: Legend of Blue Eyes White Dragon
+                    set_code: LOB
+                    num_of_cards: 126
+                    tcg_date: '2002-03-08'
+                    set_image: https://images.ygoprodeck.com/images/sets/LOB.jpg
+                  - set_name: Metal Raiders
+                    set_code: MRD
+                    num_of_cards: 144
+                    tcg_date: '2002-06-26'
+                    set_image: https://images.ygoprodeck.com/images/sets/MRD.jpg
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /cardsetsinfo.php:
+    get:
+      tags:
+      - Card Sets
+      operationId: getCardSetInfo
+      summary: YGOPRODeck Get Card Set Print Info
+      description: 'Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,
+
+        card name, set name, set code, rarity, and market price.
+
+        '
+      parameters:
+      - name: setcode
+        in: query
+        description: Set code identifying a specific card printing (e.g. `LOB-EN001`).
+        required: true
+        schema:
+          type: string
+        example: LOB-EN001
+      responses:
+        '200':
+          description: Print details for the requested set code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardSetPrint'
+              examples:
+                GetCardSetInfo200Example:
+                  summary: Default getCardSetInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 89631146
+                    name: Blue-Eyes White Dragon
+                    set_name: Legend of Blue Eyes White Dragon
+                    set_code: LOB-EN001
+                    set_rarity: Ultra Rare
+                    set_price: '253.34'
+        '400':
+          description: No card matching the requested set code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                GetCardSetInfo400Example:
+                  summary: Default getCardSetInfo 400 error response
+                  x-microcks-default: true
+                  value:
+                    error: No card matching your query was found in the database
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CardSet:
+      type: object
+      description: A Yu-Gi-Oh! card set (booster pack, structure deck, tin, etc.).
+      properties:
+        set_name:
+          type: string
+          description: Set name.
+          example: Legend of Blue Eyes White Dragon
+        set_code:
+          type: string
+          description: Set code prefix (e.g. `LOB`).
+          example: LOB
+        num_of_cards:
+          type: integer
+          description: Number of cards in the set.
+          example: 126
+        tcg_date:
+          type: string
+          format: date
+          description: TCG release date.
+          example: '2002-03-08'
+        set_image:
+          type: string
+          format: uri
+          description: Set image URL.
+          example: https://images.ygoprodeck.com/images/sets/LOB.jpg
+      required:
+      - set_name
+      - set_code
+    CardSetPrint:
+      type: object
+      description: Per-print details for a specific set code (single card printing).
+      properties:
+        id:
+          type: integer
+          description: Card id (passcode).
+          example: 89631146
+        name:
+          type: string
+          description: Card name.
+          example: Blue-Eyes White Dragon
+        set_name:
+          type: string
+          description: Set name.
+          example: Legend of Blue Eyes White Dragon
+        set_code:
+          type: string
+          description: Full set code identifying this printing.
+          example: LOB-EN001
+        set_rarity:
+          type: string
+          description: Rarity of this printing.
+          example: Ultra Rare
+        set_price:
+          type: string
+          description: Price of this printing (USD, stringified decimal).
+          example: '253.34'
+      required:
+      - id
+      - name
+      - set_name
+      - set_code
+      - set_rarity
+    ErrorResponse:
+      type: object
+      description: Standard YGOPRODeck error envelope. Returned with HTTP 400 for invalid requests.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message. Often includes suggested valid values.
+          example: No card matching your query was found in the database.
+      required:
+      - error
+externalDocs:
+  description: YGOPRODeck API Guide
+  url: https://ygoprodeck.com/api-guide/

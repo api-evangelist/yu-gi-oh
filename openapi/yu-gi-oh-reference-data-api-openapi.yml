@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Reference Data API
+  version: v7
+  description: 'YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game
+
+    corpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid
+
+    value enumerations used by the search engine (types, races, attributes, link markers),
+
+    the underlying database version, and a random-card endpoint. No authentication is required;
+
+    the documented rate limit is 20 requests per second per IP (one-hour ban on violation).
+
+
+    All card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec
+
+    is a third-party API description, generated from the YGOPRODeck API Guide
+
+    (https://ygoprodeck.com/api-guide/) and live response inspection.
+
+    '
+  termsOfService: https://ygoprodeck.com/api-guide/
+  contact:
+    name: YGOPRODeck
+    url: https://ygoprodeck.com/
+  license:
+    name: Community / Unspecified
+    url: https://ygoprodeck.com/about/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://db.ygoprodeck.com/api/v7
+  description: YGOPRODeck v7 production API
+tags:
+- name: Reference Data
+  description: Valid value enumerations used by the search engine.
+paths:
+  /cardvalues.php:
+    get:
+      tags:
+      - Reference Data
+      operationId: getCardValues
+      summary: YGOPRODeck Get Valid Card Filter Values
+      description: 'Return the canonical valid value enumerations used by the search engine — every card
+
+        type, monster race, monster attribute, level, link marker, and the per-card-class
+
+        (MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates
+
+        cardinfo query parameters before submission.
+
+        '
+      responses:
+        '200':
+          description: Valid value enumerations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardValues'
+              examples:
+                GetCardValues200Example:
+                  summary: Default getCardValues 200 response
+                  x-microcks-default: true
+                  value:
+                    types:
+                    - name: Effect Monster
+                      group: MONSTER
+                      sortGroup: 2
+                      area:
+                      - MAIN
+                      - SIDE
+                    - name: Link Monster
+                      group: MONSTER
+                      sortGroup: 7
+                      area:
+                      - EXTRA
+                      - SIDE
+                    - name: Spell Card
+                      group: SPELL
+                      sortGroup: 8
+                      area:
+                      - MAIN
+                      - SIDE
+                    MONSTER:
+                      type:
+                      - Effect Monster
+                      - Normal Monster
+                      - Link Monster
+                      - XYZ Monster
+                      - Synchro Monster
+                      - Fusion Monster
+                      race:
+                      - Dragon
+                      - Spellcaster
+                      - Warrior
+                      - Beast
+                      attributes:
+                      - DARK
+                      - LIGHT
+                      - WATER
+                      - FIRE
+                      - WIND
+                      - EARTH
+                      - DIVINE
+                      level:
+                      - 1
+                      - 2
+                      - 3
+                      - 4
+                      - 5
+                      - 6
+                      - 7
+                      - 8
+                      - 9
+                      - 10
+                      - 11
+                      - 12
+                      linkmarkers:
+                      - Top
+                      - Bottom
+                      - Left
+                      - Right
+                      - Top-Left
+                      - Top-Right
+                      - Bottom-Left
+                      - Bottom-Right
+                    SPELL:
+                      type:
+                      - Spell Card
+                      race:
+                      - Continuous
+                      - Equip
+                      - Field
+                      - Normal
+                      - Quick-Play
+                      - Ritual
+                    TRAP:
+                      type:
+                      - Trap Card
+                      race:
+                      - Continuous
+                      - Counter
+                      - Normal
+                    SKILL:
+                      type:
+                      - Skill Card
+                      race:
+                      - Jaden Yuki
+                      - Seto Kaiba
+                      - Yami Yugi
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CardValues:
+      type: object
+      description: Valid value enumerations used by the search engine, broken down by card class.
+      properties:
+        types:
+          type: array
+          description: Every card type with its group and sort order.
+          items:
+            $ref: '#/components/schemas/CardTypeEntry'
+        MONSTER:
+          $ref: '#/components/schemas/MonsterValues'
+        SPELL:
+          $ref: '#/components/schemas/CardClassValues'
+        TRAP:
+          $ref: '#/components/schemas/CardClassValues'
+        SKILL:
+          $ref: '#/components/schemas/CardClassValues'
+    MonsterValues:
+      type: object
+      description: Valid values for monster filters.
+      properties:
+        type:
+          type: array
+          description: All monster types.
+          items:
+            type: string
+        race:
+          type: array
+          description: All monster races.
+          items:
+            type: string
+        attributes:
+          type: array
+          description: All monster attributes.
+          items:
+            type: string
+        level:
+          type: array
+          description: Valid monster levels / ranks.
+          items:
+            type: integer
+        linkmarkers:
+          type: array
+          description: Valid link marker positions.
+          items:
+            type: string
+    CardTypeEntry:
+      type: object
+      description: Metadata for a single card type used by sort/filter UIs.
+      properties:
+        name:
+          type: string
+          description: Card type name.
+          example: Effect Monster
+        group:
+          type: string
+          description: Top-level card class.
+          enum:
+          - MONSTER
+          - SPELL
+          - TRAP
+          - SKILL
+          example: MONSTER
+        sortGroup:
+          type: integer
+          description: Sort order for displaying types together.
+          example: 2
+        area:
+          type: array
+          description: Deck areas where this type may be placed.
+          items:
+            type: string
+            enum:
+            - MAIN
+            - EXTRA
+            - SIDE
+          example:
+          - MAIN
+          - SIDE
+    CardClassValues:
+      type: object
+      description: Valid values for a non-monster card class (Spell, Trap, or Skill).
+      properties:
+        type:
+          type: array
+          description: Types within this card class.
+          items:
+            type: string
+        race:
+          type: array
+          description: Sub-types or races within this card class.
+          items:
+            type: string
+externalDocs:
+  description: YGOPRODeck API Guide
+  url: https://ygoprodeck.com/api-guide/
