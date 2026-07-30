@@ -1,4 +1,16 @@
 aid: yu-gi-oh
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/yu-gi-oh.png
 name: YGOPRODeck
 description: >-
   YGOPRODeck is a community-run Yu-Gi-Oh! TCG database and deck-sharing platform that exposes a free, public REST API
@@ -23,61 +35,176 @@ tags:
   - Community API
   - Public APIs
 apis:
-  - name: YGOPRODeck Card Database API
-    description: >-
-      The v7 REST API for the YGOPRODeck Yu-Gi-Oh! card database. Provides card search and filtering across every
-      printed Yu-Gi-Oh! card, full card metadata (type, race, attribute, level, link, link markers, ATK/DEF, archetype,
-      banlist, format legality), card sets and release info, archetypes, valid value enumerations, database version, and
-      a random card endpoint. Free, no API key required, 20 requests per second per IP.
-    humanURL: https://ygoprodeck.com/api-guide/
-    baseURL: https://db.ygoprodeck.com/api/v7
-    image: https://images.ygoprodeck.com/images/cards/89631146.jpg
-    tags:
-      - Games
-      - Trading Card Games
-      - Yu Gi Oh
-      - Card Database
-      - Card Search
-      - Archetypes
-      - Card Sets
-      - Pricing
-    properties:
-      - type: Documentation
-        url: https://ygoprodeck.com/api-guide/
-      - type: Documentation
-        title: Supplemental API Guide
-        url: https://ygoprodeck.com/api-guide-supplemental/
-      - type: OpenAPI
-        url: openapi/yu-gi-oh-ygoprodeck-openapi.yml
-      - type: Signup
-        url: https://ygoprodeck.com/account/
-      - type: SDKs
-        title: Python SDK (pygo_API)
-        url: https://github.com/Yeet195/pygo_API
-      - type: SDKs
-        title: Python SDK (pydeck)
-        url: https://github.com/kaangiray26/pydeck
-      - type: SDKs
-        title: Python Client (ygoprodeck-api-client)
-        url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
-      - type: SDKs
-        title: .NET / C# SDK (YGOPRODeck-Api-Wrapper)
-        url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
-      - type: SDKs
-        title: .NET Wrapper (ygopro.NET)
-        url: https://github.com/MordechaiHadad/ygopro.NET
-      - type: SDKs
-        title: JavaScript / TypeScript Wrapper
-        url: https://github.com/whdzera/ygoprodeck
-      - type: CodeExamples
-        title: Card Dataset (Weekly Snapshot)
-        url: https://github.com/fferegrino/yu-gi-oh
-      - type: CodeExamples
-        title: Image Downloader (Python)
-        url: https://github.com/usersina/YGOCards_Downloader
-      - type: Webhooks
-        title: Image Hotlinking Policy (do not hotlink)
-        url: https://ygoprodeck.com/api-guide/
+- aid: yu-gi-oh:yu-gi-oh-archetypes-api
+  name: YGOPRODeck Archetypes API
+  description: Recognised Yu-Gi-Oh! archetype catalog.
+  humanURL: https://ygoprodeck.com/api-guide/
+  baseURL: https://db.ygoprodeck.com/api/v7
+  tags:
+  - Archetypes
+  properties:
+  - type: OpenAPI
+    url: openapi/yu-gi-oh-archetypes-api-openapi.yml
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide/
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide-supplemental/
+  - type: Signup
+    url: https://ygoprodeck.com/account/
+  - type: SDKs
+    url: https://github.com/Yeet195/pygo_API
+  - type: SDKs
+    url: https://github.com/kaangiray26/pydeck
+  - type: SDKs
+    url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
+  - type: SDKs
+    url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
+  - type: SDKs
+    url: https://github.com/MordechaiHadad/ygopro.NET
+  - type: SDKs
+    url: https://github.com/whdzera/ygoprodeck
+  - type: CodeExamples
+    url: https://github.com/fferegrino/yu-gi-oh
+  - type: CodeExamples
+    url: https://github.com/usersina/YGOCards_Downloader
+  - type: Webhooks
+    url: https://ygoprodeck.com/api-guide/
+- aid: yu-gi-oh:yu-gi-oh-card-sets-api
+  name: YGOPRODeck Card Sets API
+  description: Yu-Gi-Oh! card set catalog and per-print details.
+  humanURL: https://ygoprodeck.com/api-guide/
+  baseURL: https://db.ygoprodeck.com/api/v7
+  tags:
+  - Card Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/yu-gi-oh-card-sets-api-openapi.yml
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide/
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide-supplemental/
+  - type: Signup
+    url: https://ygoprodeck.com/account/
+  - type: SDKs
+    url: https://github.com/Yeet195/pygo_API
+  - type: SDKs
+    url: https://github.com/kaangiray26/pydeck
+  - type: SDKs
+    url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
+  - type: SDKs
+    url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
+  - type: SDKs
+    url: https://github.com/MordechaiHadad/ygopro.NET
+  - type: SDKs
+    url: https://github.com/whdzera/ygoprodeck
+  - type: CodeExamples
+    url: https://github.com/fferegrino/yu-gi-oh
+  - type: CodeExamples
+    url: https://github.com/usersina/YGOCards_Downloader
+  - type: Webhooks
+    url: https://ygoprodeck.com/api-guide/
+- aid: yu-gi-oh:yu-gi-oh-cards-api
+  name: YGOPRODeck Cards API
+  description: Card search, filtering, and metadata retrieval.
+  humanURL: https://ygoprodeck.com/api-guide/
+  baseURL: https://db.ygoprodeck.com/api/v7
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/yu-gi-oh-cards-api-openapi.yml
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide/
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide-supplemental/
+  - type: Signup
+    url: https://ygoprodeck.com/account/
+  - type: SDKs
+    url: https://github.com/Yeet195/pygo_API
+  - type: SDKs
+    url: https://github.com/kaangiray26/pydeck
+  - type: SDKs
+    url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
+  - type: SDKs
+    url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
+  - type: SDKs
+    url: https://github.com/MordechaiHadad/ygopro.NET
+  - type: SDKs
+    url: https://github.com/whdzera/ygoprodeck
+  - type: CodeExamples
+    url: https://github.com/fferegrino/yu-gi-oh
+  - type: CodeExamples
+    url: https://github.com/usersina/YGOCards_Downloader
+  - type: Webhooks
+    url: https://ygoprodeck.com/api-guide/
+- aid: yu-gi-oh:yu-gi-oh-database-api
+  name: YGOPRODeck Database API
+  description: Database version and freshness information.
+  humanURL: https://ygoprodeck.com/api-guide/
+  baseURL: https://db.ygoprodeck.com/api/v7
+  tags:
+  - Database
+  properties:
+  - type: OpenAPI
+    url: openapi/yu-gi-oh-database-api-openapi.yml
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide/
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide-supplemental/
+  - type: Signup
+    url: https://ygoprodeck.com/account/
+  - type: SDKs
+    url: https://github.com/Yeet195/pygo_API
+  - type: SDKs
+    url: https://github.com/kaangiray26/pydeck
+  - type: SDKs
+    url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
+  - type: SDKs
+    url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
+  - type: SDKs
+    url: https://github.com/MordechaiHadad/ygopro.NET
+  - type: SDKs
+    url: https://github.com/whdzera/ygoprodeck
+  - type: CodeExamples
+    url: https://github.com/fferegrino/yu-gi-oh
+  - type: CodeExamples
+    url: https://github.com/usersina/YGOCards_Downloader
+  - type: Webhooks
+    url: https://ygoprodeck.com/api-guide/
+- aid: yu-gi-oh:yu-gi-oh-reference-data-api
+  name: YGOPRODeck Reference Data API
+  description: Valid value enumerations used by the search engine.
+  humanURL: https://ygoprodeck.com/api-guide/
+  baseURL: https://db.ygoprodeck.com/api/v7
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/yu-gi-oh-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide/
+  - type: Documentation
+    url: https://ygoprodeck.com/api-guide-supplemental/
+  - type: Signup
+    url: https://ygoprodeck.com/account/
+  - type: SDKs
+    url: https://github.com/Yeet195/pygo_API
+  - type: SDKs
+    url: https://github.com/kaangiray26/pydeck
+  - type: SDKs
+    url: https://github.com/RonaldTheodoro/ygoprodeck-api-client
+  - type: SDKs
+    url: https://github.com/TheAnachronism/YGOPRODeck-Api-Wrapper
+  - type: SDKs
+    url: https://github.com/MordechaiHadad/ygopro.NET
+  - type: SDKs
+    url: https://github.com/whdzera/ygoprodeck
+  - type: CodeExamples
+    url: https://github.com/fferegrino/yu-gi-oh
+  - type: CodeExamples
+    url: https://github.com/usersina/YGOCards_Downloader
+  - type: Webhooks
+    url: https://ygoprodeck.com/api-guide/
 common:
   - type: AgenticAccess
     url: agentic-access/yu-gi-oh-agentic-access.yml
