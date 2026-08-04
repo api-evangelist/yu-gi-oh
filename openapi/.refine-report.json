@@ -1,0 +1,22 @@
+{
+  "provider": "yu-gi-oh",
+  "sources": [
+    "yu-gi-oh-archetypes-api-openapi.yml",
+    "yu-gi-oh-card-sets-api-openapi.yml",
+    "yu-gi-oh-cards-api-openapi.yml",
+    "yu-gi-oh-database-api-openapi.yml",
+    "yu-gi-oh-reference-data-api-openapi.yml"
+  ],
+  "outputs": [
+    "yu-gi-oh-archetypes-api-openapi.yml",
+    "yu-gi-oh-card-sets-api-openapi.yml",
+    "yu-gi-oh-cards-api-openapi.yml",
+    "yu-gi-oh-database-api-openapi.yml",
+    "yu-gi-oh-reference-data-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
