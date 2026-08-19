@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes API",
+    "version": "v7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Archetypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck List Archetypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/archetypes.php"
+          },
+          "docs": "Return every recognised Yu-Gi-Oh! archetype name. Useful to populate archetype pickers\nand to validate the `archetype` parameter on `/cardinfo.php`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

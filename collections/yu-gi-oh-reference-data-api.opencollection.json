@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Reference Data API",
+    "version": "v7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck Get Valid Card Filter Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardvalues.php"
+          },
+          "docs": "Return the canonical valid value enumerations used by the search engine — every card\ntype, monster race, monster attribute, level, link marker, and the per-card-class\n(MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates\ncardinfo query parameters before submission.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

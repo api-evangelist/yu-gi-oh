@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "3781f159-2d75-4873-ac1e-8983edc336b5",
+      "name": "Card Sets",
+      "description": {
+        "content": "Yu-Gi-Oh! card set catalog and per-print details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43224396-ff2b-4a42-b3c3-531c37d180ab",
+          "name": "YGOPRODeck List Card Sets",
+          "request": {
+            "name": "YGOPRODeck List Card Sets",
+            "description": {
+              "content": "Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set\nname, set code, card count, TCG release date, and set image URL. Takes no parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardsets.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70f8c1bb-84b6-4d8d-a665-932971303ce6",
+              "name": "The complete card set catalog.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsets.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"set_name\": \"Legend of Blue Eyes White Dragon\",\n    \"set_code\": \"LOB\",\n    \"num_of_cards\": 126,\n    \"tcg_date\": \"2002-03-08\",\n    \"set_image\": \"https://images.ygoprodeck.com/images/sets/LOB.jpg\"\n  },\n  {\n    \"set_name\": \"Metal Raiders\",\n    \"set_code\": \"MRD\",\n    \"num_of_cards\": 144,\n    \"tcg_date\": \"2002-06-26\",\n    \"set_image\": \"https://images.ygoprodeck.com/images/sets/MRD.jpg\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4724bd3-8282-4683-8e95-94a130df9087",
+          "name": "YGOPRODeck Get Card Set Print Info",
+          "request": {
+            "name": "YGOPRODeck Get Card Set Print Info",
+            "description": {
+              "content": "Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,\ncard name, set name, set code, rarity, and market price.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardsetsinfo.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "setcode",
+                  "value": "<string>",
+                  "description": "(Required) Set code identifying a specific card printing (e.g. `LOB-EN001`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0308eb8a-640b-497f-8395-92b119b931df",
+              "name": "Print details for the requested set code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsetsinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setcode",
+                      "value": "LOB-EN001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 89631146,\n  \"name\": \"Blue-Eyes White Dragon\",\n  \"set_name\": \"Legend of Blue Eyes White Dragon\",\n  \"set_code\": \"LOB-EN001\",\n  \"set_rarity\": \"Ultra Rare\",\n  \"set_price\": \"253.34\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7883dcb-a396-4ce2-a8a2-c353b2603dc9",
+              "name": "No card matching the requested set code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardsetsinfo.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setcode",
+                      "value": "LOB-EN001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"No card matching your query was found in the database\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://db.ygoprodeck.com/api/v7",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "576505ae-f645-47f7-bd54-e744ff3a6c4d",
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Card Sets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game\ncorpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid\nvalue enumerations used by the search engine (types, races, attributes, link markers),\nthe underlying database version, and a random-card endpoint. No authentication is required;\nthe documented rate limit is 20 requests per second per IP (one-hour ban on violation).\n\nAll card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec\nis a third-party API description, generated from the YGOPRODeck API Guide\n(https://ygoprodeck.com/api-guide/) and live response inspection.\n\n\nContact Support:\n Name: YGOPRODeck",
+      "type": "text/plain"
+    }
+  }
+}

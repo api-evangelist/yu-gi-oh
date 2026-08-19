@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Card Sets API",
+    "version": "v7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck List Card Sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardsets.php"
+          },
+          "docs": "Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set\nname, set code, card count, TCG release date, and set image URL. Takes no parameters.\n"
+        },
+        {
+          "info": {
+            "name": "YGOPRODeck Get Card Set Print Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/cardsetsinfo.php",
+            "params": [
+              {
+                "name": "setcode",
+                "value": "LOB-EN001",
+                "type": "query",
+                "description": "Set code identifying a specific card printing (e.g. `LOB-EN001`)."
+              }
+            ]
+          },
+          "docs": "Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,\ncard name, set name, set code, rarity, and market price.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Archetypes Database API",
+    "version": "v7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Database",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YGOPRODeck Get Database Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://db.ygoprodeck.com/api/v7/checkDBVer.php"
+          },
+          "docs": "Return the current YGOPRODeck card database version and last-updated timestamp. Clients\nshould poll this endpoint and invalidate their local cache when the version changes.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

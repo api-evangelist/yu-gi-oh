@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "790b5767-4137-4480-96c8-fdc57c5c22af",
+      "name": "Database",
+      "description": {
+        "content": "Database version and freshness information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f569b96b-5a43-4023-a22d-b62b11f2d130",
+          "name": "YGOPRODeck Get Database Version",
+          "request": {
+            "name": "YGOPRODeck Get Database Version",
+            "description": {
+              "content": "Return the current YGOPRODeck card database version and last-updated timestamp. Clients\nshould poll this endpoint and invalidate their local cache when the version changes.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkDBVer.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3368100d-341c-4eb5-a3d3-6dea5bb64895",
+              "name": "Current database version and last-update timestamp.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkDBVer.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"database_version\": \"145.46\",\n    \"last_update\": \"2026-05-22 16:00:23\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://db.ygoprodeck.com/api/v7",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f9a4f02a-0c42-45ae-89e6-fcafb2d58301",
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Archetypes Database API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game\ncorpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid\nvalue enumerations used by the search engine (types, races, attributes, link markers),\nthe underlying database version, and a random-card endpoint. No authentication is required;\nthe documented rate limit is 20 requests per second per IP (one-hour ban on violation).\n\nAll card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec\nis a third-party API description, generated from the YGOPRODeck API Guide\n(https://ygoprodeck.com/api-guide/) and live response inspection.\n\n\nContact Support:\n Name: YGOPRODeck",
+      "type": "text/plain"
+    }
+  }
+}

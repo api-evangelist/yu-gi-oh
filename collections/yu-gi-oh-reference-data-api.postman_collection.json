@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "94e2f417-6928-4a7f-94e9-0ef49212ceaa",
+      "name": "Reference Data",
+      "description": {
+        "content": "Valid value enumerations used by the search engine.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c25fd81-09a5-47b3-857d-b1ae162ea407",
+          "name": "YGOPRODeck Get Valid Card Filter Values",
+          "request": {
+            "name": "YGOPRODeck Get Valid Card Filter Values",
+            "description": {
+              "content": "Return the canonical valid value enumerations used by the search engine — every card\ntype, monster race, monster attribute, level, link marker, and the per-card-class\n(MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates\ncardinfo query parameters before submission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardvalues.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e38b9a61-5d02-4c9c-b981-691265b67630",
+              "name": "Valid value enumerations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardvalues.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"types\": [\n    {\n      \"name\": \"Effect Monster\",\n      \"group\": \"MONSTER\",\n      \"sortGroup\": 2,\n      \"area\": [\n        \"MAIN\",\n        \"SIDE\"\n      ]\n    },\n    {\n      \"name\": \"Link Monster\",\n      \"group\": \"MONSTER\",\n      \"sortGroup\": 7,\n      \"area\": [\n        \"EXTRA\",\n        \"SIDE\"\n      ]\n    },\n    {\n      \"name\": \"Spell Card\",\n      \"group\": \"SPELL\",\n      \"sortGroup\": 8,\n      \"area\": [\n        \"MAIN\",\n        \"SIDE\"\n      ]\n    }\n  ],\n  \"MONSTER\": {\n    \"type\": [\n      \"Effect Monster\",\n      \"Normal Monster\",\n      \"Link Monster\",\n      \"XYZ Monster\",\n      \"Synchro Monster\",\n      \"Fusion Monster\"\n    ],\n    \"race\": [\n      \"Dragon\",\n      \"Spellcaster\",\n      \"Warrior\",\n      \"Beast\"\n    ],\n    \"attributes\": [\n      \"DARK\",\n      \"LIGHT\",\n      \"WATER\",\n      \"FIRE\",\n      \"WIND\",\n      \"EARTH\",\n      \"DIVINE\"\n    ],\n    \"level\": [\n      1,\n      2,\n      3,\n      4,\n      5,\n      6,\n      7,\n      8,\n      9,\n      10,\n      11,\n      12\n    ],\n    \"linkmarkers\": [\n      \"Top\",\n      \"Bottom\",\n      \"Left\",\n      \"Right\",\n      \"Top-Left\",\n      \"Top-Right\",\n      \"Bottom-Left\",\n      \"Bottom-Right\"\n    ]\n  },\n  \"SPELL\": {\n    \"type\": [\n      \"Spell Card\"\n    ],\n    \"race\": [\n      \"Continuous\",\n      \"Equip\",\n      \"Field\",\n      \"Normal\",\n      \"Quick-Play\",\n      \"Ritual\"\n    ]\n  },\n  \"TRAP\": {\n    \"type\": [\n      \"Trap Card\"\n    ],\n    \"race\": [\n      \"Continuous\",\n      \"Counter\",\n      \"Normal\"\n    ]\n  },\n  \"SKILL\": {\n    \"type\": [\n      \"Skill Card\"\n    ],\n    \"race\": [\n      \"Jaden Yuki\",\n      \"Seto Kaiba\",\n      \"Yami Yugi\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://db.ygoprodeck.com/api/v7",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f6bfa35e-2de9-4b5a-bfee-837667725fbc",
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Reference Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game\ncorpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid\nvalue enumerations used by the search engine (types, races, attributes, link markers),\nthe underlying database version, and a random-card endpoint. No authentication is required;\nthe documented rate limit is 20 requests per second per IP (one-hour ban on violation).\n\nAll card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec\nis a third-party API description, generated from the YGOPRODeck API Guide\n(https://ygoprodeck.com/api-guide/) and live response inspection.\n\n\nContact Support:\n Name: YGOPRODeck",
+      "type": "text/plain"
+    }
+  }
+}

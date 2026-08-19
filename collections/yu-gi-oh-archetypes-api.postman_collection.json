@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "9b9127bd-a5a2-4a6b-9196-c71a9a4dee70",
+      "name": "Archetypes",
+      "description": {
+        "content": "Recognised Yu-Gi-Oh! archetype catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "230ce8e1-f679-4c51-8856-882c76448efd",
+          "name": "YGOPRODeck List Archetypes",
+          "request": {
+            "name": "YGOPRODeck List Archetypes",
+            "description": {
+              "content": "Return every recognised Yu-Gi-Oh! archetype name. Useful to populate archetype pickers\nand to validate the `archetype` parameter on `/cardinfo.php`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "archetypes.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b21014c4-e88d-4e91-b427-d1680fbadf8e",
+              "name": "The complete archetype catalog.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "archetypes.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"archetype_name\": \"Blue-Eyes\"\n  },\n  {\n    \"archetype_name\": \"Dark Magician\"\n  },\n  {\n    \"archetype_name\": \"Red-Eyes\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://db.ygoprodeck.com/api/v7",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c26c6173-baed-460b-9ba8-4e1c3165b3c6",
+    "name": "YGOPRODeck Yu-Gi-Oh! Card Database Archetypes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game\ncorpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid\nvalue enumerations used by the search engine (types, races, attributes, link markers),\nthe underlying database version, and a random-card endpoint. No authentication is required;\nthe documented rate limit is 20 requests per second per IP (one-hour ban on violation).\n\nAll card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec\nis a third-party API description, generated from the YGOPRODeck API Guide\n(https://ygoprodeck.com/api-guide/) and live response inspection.\n\n\nContact Support:\n Name: YGOPRODeck",
+      "type": "text/plain"
+    }
+  }
+}
