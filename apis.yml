@@ -18,7 +18,7 @@ description: >-
   image. The API is the canonical open data source used by community deck builders, mobile apps, Discord bots,
   simulators, and analytics tools across the Yu-Gi-Oh! ecosystem.
 url: https://ygoprodeck.com/api-guide/
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-type: opensource
