@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Cards API
   version: v7
@@ -439,99 +439,76 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CardImage:
+    CardMiscInfo:
       type: object
-      description: Image URLs for a single artwork variant of a card.
+      description: Extended per-card metadata returned only when `misc=yes` is passed to `/cardinfo.php`.
       properties:
-        id:
+        beta_name:
+          type: string
+          description: Original beta name (if different from the released name).
+        views:
           type: integer
-          description: Image id (matches the card id for the default artwork; differs for alternate artworks).
-          example: 46986414
-        image_url:
-          type: string
-          format: uri
-          description: Full-size card image URL. Do not hotlink — download and self-host.
-          example: https://images.ygoprodeck.com/images/cards/46986414.jpg
-        image_url_small:
-          type: string
-          format: uri
-          description: Small / thumbnail image URL.
-          example: https://images.ygoprodeck.com/images/cards_small/46986414.jpg
-        image_url_cropped:
-          type: string
-          format: uri
-          description: Cropped artwork-only image URL (no frame).
-          example: https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg
-      required:
-      - id
-      - image_url
-      - image_url_small
-      - image_url_cropped
-    ErrorResponse:
-      type: object
-      description: Standard YGOPRODeck error envelope. Returned with HTTP 400 for invalid requests.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message. Often includes suggested valid values.
-          example: No card matching your query was found in the database.
-      required:
-      - error
-    SearchMeta:
-      type: object
-      description: Pagination metadata included when `num` and `offset` are used.
-      properties:
-        current_rows:
+          description: YGOPRODeck card page view count.
+          example: 152340
+        viewsweek:
           type: integer
-          description: Number of rows in the current page.
-          example: 20
-        total_rows:
+          description: YGOPRODeck card page view count over the last 7 days.
+          example: 421
+        upvotes:
           type: integer
-          description: Total number of rows matched by the query.
-          example: 144
-        rows_remaining:
+          description: Community upvote count.
+          example: 540
+        downvotes:
           type: integer
-          description: Rows remaining after this page.
-          example: 124
-        total_pages:
+          description: Community downvote count.
+          example: 12
+        formats:
+          type: array
+          description: Tournament formats the card is legal in.
+          items:
+            type: string
+          example:
+          - TCG
+          - OCG
+          - Master Duel
+        treated_as:
+          type: string
+          description: An alternate card name this card is officially treated as (for ruling purposes).
+        tcg_date:
+          type: string
+          format: date
+          description: TCG (English) release date.
+          example: '2002-03-08'
+        ocg_date:
+          type: string
+          format: date
+          description: OCG (Japanese) release date.
+          example: '1999-02-04'
+        konami_id:
           type: integer
-          description: Total number of pages.
-          example: 8
-        pages_remaining:
+          description: Internal Konami card id.
+          example: 4007
+        has_effect:
           type: integer
-          description: Pages remaining after this one.
-          example: 7
-        next_page:
+          description: 1 if the card has an actual rules effect; 0 if not.
+          example: 0
+        md_rarity:
           type: string
-          format: uri
-          description: URL for the next page.
-        next_page_offset:
+          description: Master Duel rarity (if applicable).
+          example: UR
+        genesys_points:
           type: integer
-          description: Offset value for the next page.
-    CardPrice:
-      type: object
-      description: Marketplace prices for a card (USD, stringified decimal).
-      properties:
-        cardmarket_price:
+          description: GenesYS-format point cost. Only returned when `format=genesys` is passed.
+          example: 100
+        question_atk:
+          type: integer
+          description: 1 if the card has `?` as ATK (special-case Pendulum/Effect ATK).
+        question_def:
+          type: integer
+          description: 1 if the card has `?` as DEF.
+        staple:
           type: string
-          description: Cardmarket price (USD).
-          example: '0.02'
-        tcgplayer_price:
-          type: string
-          description: TCGplayer price (USD).
-          example: '0.24'
-        ebay_price:
-          type: string
-          description: eBay price (USD).
-          example: '0.99'
-        amazon_price:
-          type: string
-          description: Amazon price (USD).
-          example: '14.45'
-        coolstuffinc_price:
-          type: string
-          description: CoolStuffInc price (USD).
-          example: '0.39'
+          description: '`yes` if YGOPRODeck classifies this card as a staple in any format.'
     Card:
       type: object
       description: A single Yu-Gi-Oh! card, including metadata, set printings, image URLs, and marketplace prices.
@@ -657,76 +634,16 @@ components:
       - type
       - frameType
       - desc
-    CardMiscInfo:
+    ErrorResponse:
       type: object
-      description: Extended per-card metadata returned only when `misc=yes` is passed to `/cardinfo.php`.
+      description: Standard YGOPRODeck error envelope. Returned with HTTP 400 for invalid requests.
       properties:
-        beta_name:
+        error:
           type: string
-          description: Original beta name (if different from the released name).
-        views:
-          type: integer
-          description: YGOPRODeck card page view count.
-          example: 152340
-        viewsweek:
-          type: integer
-          description: YGOPRODeck card page view count over the last 7 days.
-          example: 421
-        upvotes:
-          type: integer
-          description: Community upvote count.
-          example: 540
-        downvotes:
-          type: integer
-          description: Community downvote count.
-          example: 12
-        formats:
-          type: array
-          description: Tournament formats the card is legal in.
-          items:
-            type: string
-          example:
-          - TCG
-          - OCG
-          - Master Duel
-        treated_as:
-          type: string
-          description: An alternate card name this card is officially treated as (for ruling purposes).
-        tcg_date:
-          type: string
-          format: date
-          description: TCG (English) release date.
-          example: '2002-03-08'
-        ocg_date:
-          type: string
-          format: date
-          description: OCG (Japanese) release date.
-          example: '1999-02-04'
-        konami_id:
-          type: integer
-          description: Internal Konami card id.
-          example: 4007
-        has_effect:
-          type: integer
-          description: 1 if the card has an actual rules effect; 0 if not.
-          example: 0
-        md_rarity:
-          type: string
-          description: Master Duel rarity (if applicable).
-          example: UR
-        genesys_points:
-          type: integer
-          description: GenesYS-format point cost. Only returned when `format=genesys` is passed.
-          example: 100
-        question_atk:
-          type: integer
-          description: 1 if the card has `?` as ATK (special-case Pendulum/Effect ATK).
-        question_def:
-          type: integer
-          description: 1 if the card has `?` as DEF.
-        staple:
-          type: string
-          description: '`yes` if YGOPRODeck classifies this card as a staple in any format.'
+          description: Human-readable error message. Often includes suggested valid values.
+          example: No card matching your query was found in the database.
+      required:
+      - error
     CardPrintingEntry:
       type: object
       description: A single set printing of a card.
@@ -755,6 +672,37 @@ components:
       - set_name
       - set_code
       - set_rarity
+    SearchMeta:
+      type: object
+      description: Pagination metadata included when `num` and `offset` are used.
+      properties:
+        current_rows:
+          type: integer
+          description: Number of rows in the current page.
+          example: 20
+        total_rows:
+          type: integer
+          description: Total number of rows matched by the query.
+          example: 144
+        rows_remaining:
+          type: integer
+          description: Rows remaining after this page.
+          example: 124
+        total_pages:
+          type: integer
+          description: Total number of pages.
+          example: 8
+        pages_remaining:
+          type: integer
+          description: Pages remaining after this one.
+          example: 7
+        next_page:
+          type: string
+          format: uri
+          description: URL for the next page.
+        next_page_offset:
+          type: integer
+          description: Offset value for the next page.
     CardSearchResponse:
       type: object
       description: Wrapper response for `/cardinfo.php` queries.
@@ -768,6 +716,58 @@ components:
           $ref: '#/components/schemas/SearchMeta'
       required:
       - data
+    CardImage:
+      type: object
+      description: Image URLs for a single artwork variant of a card.
+      properties:
+        id:
+          type: integer
+          description: Image id (matches the card id for the default artwork; differs for alternate artworks).
+          example: 46986414
+        image_url:
+          type: string
+          format: uri
+          description: Full-size card image URL. Do not hotlink — download and self-host.
+          example: https://images.ygoprodeck.com/images/cards/46986414.jpg
+        image_url_small:
+          type: string
+          format: uri
+          description: Small / thumbnail image URL.
+          example: https://images.ygoprodeck.com/images/cards_small/46986414.jpg
+        image_url_cropped:
+          type: string
+          format: uri
+          description: Cropped artwork-only image URL (no frame).
+          example: https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg
+      required:
+      - id
+      - image_url
+      - image_url_small
+      - image_url_cropped
+    CardPrice:
+      type: object
+      description: Marketplace prices for a card (USD, stringified decimal).
+      properties:
+        cardmarket_price:
+          type: string
+          description: Cardmarket price (USD).
+          example: '0.02'
+        tcgplayer_price:
+          type: string
+          description: TCGplayer price (USD).
+          example: '0.24'
+        ebay_price:
+          type: string
+          description: eBay price (USD).
+          example: '0.99'
+        amazon_price:
+          type: string
+          description: Amazon price (USD).
+          example: '14.45'
+        coolstuffinc_price:
+          type: string
+          description: CoolStuffInc price (USD).
+          example: '0.39'
 externalDocs:
   description: YGOPRODeck API Guide
   url: https://ygoprodeck.com/api-guide/

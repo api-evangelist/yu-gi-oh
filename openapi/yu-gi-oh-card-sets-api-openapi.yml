@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Card Sets API
   version: v7
@@ -128,35 +128,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CardSet:
-      type: object
-      description: A Yu-Gi-Oh! card set (booster pack, structure deck, tin, etc.).
-      properties:
-        set_name:
-          type: string
-          description: Set name.
-          example: Legend of Blue Eyes White Dragon
-        set_code:
-          type: string
-          description: Set code prefix (e.g. `LOB`).
-          example: LOB
-        num_of_cards:
-          type: integer
-          description: Number of cards in the set.
-          example: 126
-        tcg_date:
-          type: string
-          format: date
-          description: TCG release date.
-          example: '2002-03-08'
-        set_image:
-          type: string
-          format: uri
-          description: Set image URL.
-          example: https://images.ygoprodeck.com/images/sets/LOB.jpg
-      required:
-      - set_name
-      - set_code
     CardSetPrint:
       type: object
       description: Per-print details for a specific set code (single card printing).
@@ -201,6 +172,35 @@ components:
           example: No card matching your query was found in the database.
       required:
       - error
+    CardSet:
+      type: object
+      description: A Yu-Gi-Oh! card set (booster pack, structure deck, tin, etc.).
+      properties:
+        set_name:
+          type: string
+          description: Set name.
+          example: Legend of Blue Eyes White Dragon
+        set_code:
+          type: string
+          description: Set code prefix (e.g. `LOB`).
+          example: LOB
+        num_of_cards:
+          type: integer
+          description: Number of cards in the set.
+          example: 126
+        tcg_date:
+          type: string
+          format: date
+          description: TCG release date.
+          example: '2002-03-08'
+        set_image:
+          type: string
+          format: uri
+          description: Set image URL.
+          example: https://images.ygoprodeck.com/images/sets/LOB.jpg
+      required:
+      - set_name
+      - set_code
 externalDocs:
   description: YGOPRODeck API Guide
   url: https://ygoprodeck.com/api-guide/

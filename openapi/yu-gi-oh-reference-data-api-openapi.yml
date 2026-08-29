@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Reference Data API
   version: v7
@@ -154,23 +154,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CardValues:
-      type: object
-      description: Valid value enumerations used by the search engine, broken down by card class.
-      properties:
-        types:
-          type: array
-          description: Every card type with its group and sort order.
-          items:
-            $ref: '#/components/schemas/CardTypeEntry'
-        MONSTER:
-          $ref: '#/components/schemas/MonsterValues'
-        SPELL:
-          $ref: '#/components/schemas/CardClassValues'
-        TRAP:
-          $ref: '#/components/schemas/CardClassValues'
-        SKILL:
-          $ref: '#/components/schemas/CardClassValues'
     MonsterValues:
       type: object
       description: Valid values for monster filters.
@@ -198,6 +181,37 @@ components:
         linkmarkers:
           type: array
           description: Valid link marker positions.
+          items:
+            type: string
+    CardValues:
+      type: object
+      description: Valid value enumerations used by the search engine, broken down by card class.
+      properties:
+        types:
+          type: array
+          description: Every card type with its group and sort order.
+          items:
+            $ref: '#/components/schemas/CardTypeEntry'
+        MONSTER:
+          $ref: '#/components/schemas/MonsterValues'
+        SPELL:
+          $ref: '#/components/schemas/CardClassValues'
+        TRAP:
+          $ref: '#/components/schemas/CardClassValues'
+        SKILL:
+          $ref: '#/components/schemas/CardClassValues'
+    CardClassValues:
+      type: object
+      description: Valid values for a non-monster card class (Spell, Trap, or Skill).
+      properties:
+        type:
+          type: array
+          description: Types within this card class.
+          items:
+            type: string
+        race:
+          type: array
+          description: Sub-types or races within this card class.
           items:
             type: string
     CardTypeEntry:
@@ -233,20 +247,6 @@ components:
           example:
           - MAIN
           - SIDE
-    CardClassValues:
-      type: object
-      description: Valid values for a non-monster card class (Spell, Trap, or Skill).
-      properties:
-        type:
-          type: array
-          description: Types within this card class.
-          items:
-            type: string
-        race:
-          type: array
-          description: Sub-types or races within this card class.
-          items:
-            type: string
 externalDocs:
   description: YGOPRODeck API Guide
   url: https://ygoprodeck.com/api-guide/
