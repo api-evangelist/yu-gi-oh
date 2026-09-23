@@ -1,11 +1,7 @@
 {
   "provider": "yu-gi-oh",
   "sources": [
-    "yu-gi-oh-archetypes-api-openapi.yml",
-    "yu-gi-oh-card-sets-api-openapi.yml",
-    "yu-gi-oh-cards-api-openapi.yml",
-    "yu-gi-oh-database-api-openapi.yml",
-    "yu-gi-oh-reference-data-api-openapi.yml"
+    "_ae-authored/yu-gi-oh-ygoprodeck-openapi.yml"
   ],
   "outputs": [
     "yu-gi-oh-archetypes-api-openapi.yml",
@@ -18,12 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "yu-gi-oh-archetypes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "yu-gi-oh-card-sets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "yu-gi-oh-cards-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "yu-gi-oh-database-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "yu-gi-oh-reference-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "yu-gi-oh-ygoprodeck-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "yu-gi-oh-archetypes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yu-gi-oh-card-sets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yu-gi-oh-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yu-gi-oh-database-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yu-gi-oh-reference-data-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

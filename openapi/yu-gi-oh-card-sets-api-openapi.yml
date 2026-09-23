@@ -1,25 +1,8 @@
 openapi: 3.2.0
 info:
-  title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Card Sets API
+  title: YGOPRODeck Yu-Gi-Oh! Card Database Card Sets API
   version: v7
-  description: 'YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game
-
-    corpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid
-
-    value enumerations used by the search engine (types, races, attributes, link markers),
-
-    the underlying database version, and a random-card endpoint. No authentication is required;
-
-    the documented rate limit is 20 requests per second per IP (one-hour ban on violation).
-
-
-    All card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec
-
-    is a third-party API description, generated from the YGOPRODeck API Guide
-
-    (https://ygoprodeck.com/api-guide/) and live response inspection.
-
-    '
+  description: YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh!
   termsOfService: https://ygoprodeck.com/api-guide/
   contact:
     name: YGOPRODeck
@@ -44,9 +27,7 @@ paths:
       summary: YGOPRODeck List Card Sets
       description: 'Return every Yu-Gi-Oh! card set known to YGOPRODeck — over 1,000 entries — with set
 
-        name, set code, card count, TCG release date, and set image URL. Takes no parameters.
-
-        '
+        name, set code, card count, TCG release date, and set image URL. Takes no parameters.'
       responses:
         '200':
           description: The complete card set catalog.
@@ -82,9 +63,7 @@ paths:
       summary: YGOPRODeck Get Card Set Print Info
       description: 'Look up the per-print details for a specific set-code (e.g. `LOB-EN001`) — the card id,
 
-        card name, set name, set code, rarity, and market price.
-
-        '
+        card name, set name, set code, rarity, and market price.'
       parameters:
       - name: setcode
         in: query

@@ -1,25 +1,8 @@
 openapi: 3.2.0
 info:
-  title: YGOPRODeck Yu-Gi-Oh! Card Database Archetypes Reference Data API
+  title: YGOPRODeck Yu-Gi-Oh! Card Database Reference Data API
   version: v7
-  description: 'YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh! Trading Card Game
-
-    corpus. The v7 API exposes card search and filtering, card sets, archetypes, the valid
-
-    value enumerations used by the search engine (types, races, attributes, link markers),
-
-    the underlying database version, and a random-card endpoint. No authentication is required;
-
-    the documented rate limit is 20 requests per second per IP (one-hour ban on violation).
-
-
-    All card text and imagery is copyright Konami Digital Entertainment / 4K Media. This spec
-
-    is a third-party API description, generated from the YGOPRODeck API Guide
-
-    (https://ygoprodeck.com/api-guide/) and live response inspection.
-
-    '
+  description: YGOPRODeck is a free, community-run REST API for the complete Yu-Gi-Oh!
   termsOfService: https://ygoprodeck.com/api-guide/
   contact:
     name: YGOPRODeck
@@ -48,9 +31,7 @@ paths:
 
         (MONSTER / SPELL / TRAP / SKILL) breakdowns. Drives client-side dropdowns and validates
 
-        cardinfo query parameters before submission.
-
-        '
+        cardinfo query parameters before submission.'
       responses:
         '200':
           description: Valid value enumerations.
@@ -154,52 +135,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MonsterValues:
-      type: object
-      description: Valid values for monster filters.
-      properties:
-        type:
-          type: array
-          description: All monster types.
-          items:
-            type: string
-        race:
-          type: array
-          description: All monster races.
-          items:
-            type: string
-        attributes:
-          type: array
-          description: All monster attributes.
-          items:
-            type: string
-        level:
-          type: array
-          description: Valid monster levels / ranks.
-          items:
-            type: integer
-        linkmarkers:
-          type: array
-          description: Valid link marker positions.
-          items:
-            type: string
-    CardValues:
-      type: object
-      description: Valid value enumerations used by the search engine, broken down by card class.
-      properties:
-        types:
-          type: array
-          description: Every card type with its group and sort order.
-          items:
-            $ref: '#/components/schemas/CardTypeEntry'
-        MONSTER:
-          $ref: '#/components/schemas/MonsterValues'
-        SPELL:
-          $ref: '#/components/schemas/CardClassValues'
-        TRAP:
-          $ref: '#/components/schemas/CardClassValues'
-        SKILL:
-          $ref: '#/components/schemas/CardClassValues'
     CardClassValues:
       type: object
       description: Valid values for a non-monster card class (Spell, Trap, or Skill).
@@ -247,6 +182,52 @@ components:
           example:
           - MAIN
           - SIDE
+    CardValues:
+      type: object
+      description: Valid value enumerations used by the search engine, broken down by card class.
+      properties:
+        types:
+          type: array
+          description: Every card type with its group and sort order.
+          items:
+            $ref: '#/components/schemas/CardTypeEntry'
+        MONSTER:
+          $ref: '#/components/schemas/MonsterValues'
+        SPELL:
+          $ref: '#/components/schemas/CardClassValues'
+        TRAP:
+          $ref: '#/components/schemas/CardClassValues'
+        SKILL:
+          $ref: '#/components/schemas/CardClassValues'
+    MonsterValues:
+      type: object
+      description: Valid values for monster filters.
+      properties:
+        type:
+          type: array
+          description: All monster types.
+          items:
+            type: string
+        race:
+          type: array
+          description: All monster races.
+          items:
+            type: string
+        attributes:
+          type: array
+          description: All monster attributes.
+          items:
+            type: string
+        level:
+          type: array
+          description: Valid monster levels / ranks.
+          items:
+            type: integer
+        linkmarkers:
+          type: array
+          description: Valid link marker positions.
+          items:
+            type: string
 externalDocs:
   description: YGOPRODeck API Guide
   url: https://ygoprodeck.com/api-guide/
