@@ -107,6 +107,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard YGOPRODeck error envelope. Returned with HTTP 400 for invalid requests.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message. Often includes suggested valid values.
+          example: No card matching your query was found in the database.
+      required:
+      - error
     CardSetPrint:
       type: object
       description: Per-print details for a specific set code (single card printing).
@@ -141,16 +151,6 @@ components:
       - set_name
       - set_code
       - set_rarity
-    ErrorResponse:
-      type: object
-      description: Standard YGOPRODeck error envelope. Returned with HTTP 400 for invalid requests.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message. Often includes suggested valid values.
-          example: No card matching your query was found in the database.
-      required:
-      - error
     CardSet:
       type: object
       description: A Yu-Gi-Oh! card set (booster pack, structure deck, tin, etc.).
