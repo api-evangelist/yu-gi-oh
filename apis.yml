@@ -32,7 +32,7 @@ description: >-
 url: https://ygoprodeck.com/api-guide/
 specificationVersion: '0.23'
 created: '2026-05-28'
-modified: '2026-05-30'
+modified: '2026-10-06'
 x-type: opensource
 x-source: public-apis/public-apis
 x-category: Games & Comics
@@ -218,6 +218,8 @@ apis:
   - type: Webhooks
     url: https://ygoprodeck.com/api-guide/
 common:
+  - url: https://ygoprodeck.com/category/format-article/news
+    type: Blog
   - type: AgenticAccess
     url: agentic-access/yu-gi-oh-agentic-access.yml
   - type: DomainSecurity
